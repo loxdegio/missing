@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name><![CDATA[missing]]></name>
+    <description lang="en"><![CDATA[Missing Gentoo Overlay]]></description>
+    <homepage>https://github.com/loxdegio/missing</homepage>
+    <owner type="person">
+      <name><![CDATA[loxdegio]]></name>
+      <email>loxdegio@hotmail.com</email>
+    </owner>
+    <source type="git">git://github.com/loxdegio/missing.git</source>
+    <source type="git">https://github.com/loxdegio/missing.git</source>
+  </repo>
+</repositories>
