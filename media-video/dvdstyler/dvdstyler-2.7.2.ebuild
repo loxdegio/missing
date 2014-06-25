@@ -18,7 +18,7 @@ IUSE="debug deprecated +udev"
 
 COMMON_DEPEND=">=app-cdr/dvd+rw-tools-7.1
 	media-libs/libexif
-	>=media-libs/wxsvg-1.3
+	=media-libs/wxsvg-1.3
 	>=media-video/dvdauthor-0.7
 	>=media-video/xine-ui-0.99.1
 	virtual/cdrtools
