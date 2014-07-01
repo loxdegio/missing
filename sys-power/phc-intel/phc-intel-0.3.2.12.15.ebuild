@@ -41,9 +41,8 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/phc-intel-pack-rev12-trailing-space-r1.patch
-	epatch "${FILESDIR}"/phc-intel-pack-rev15-trailing-space-3.13.patch
-	epatch "${FILESDIR}"/phc-intel-pack-rev15-trailing-space-3.14.patch
+	epatch "${FILESDIR}"/phc-intel-pack-rev14-trailing-space-3.13.patch
+	epatch "${FILESDIR}"/phc-intel-pack-rev14-trailing-space-3.14.patch
 	epatch "${FILESDIR}"/phc-intel-pack-rev15-trailing-space-3.15.patch
 
 	sed -e '/^all:/s:prepare::' \
