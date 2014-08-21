@@ -26,7 +26,7 @@ CDEPEND="
 "
 DEPEND="${CDEPEND}
 	virtual/pkgconfig
-	=net-im/libcommuni-9999 
+	net-im/libcommuni 
 "
 RDEPEND="${CDEPEND}
 	geoip? ( dev-libs/geoip )
