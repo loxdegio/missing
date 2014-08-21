@@ -20,11 +20,9 @@ RDEPEND="dev-qt/qtcore:4
 
 DEPEND="${RDEPEND}
 	test? ( dev-qt/qttest )"
-	
-S=${WORKDIR}/${PN}
 
 src_prepare() {
-	UCHD="${S}"/src/3rdparty/uchardet-0.0.1/uchardet.pri
+	UCHD=src/3rdparty/uchardet-0.0.1/uchardet.pri
 	echo "CONFIG *= link_pkgconfig" > "$UCHD"
 	echo "PKGCONFIG += uchardet" >> "$UCHD"
 	qt4-r2_src_prepare
