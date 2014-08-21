@@ -7,7 +7,7 @@ inherit qt4-r2
 
 DESCRIPTION="A cross-platform IRC framework written with Qt 4"
 HOMEPAGE="http://communi.github.io/"
-EGIT_REPO_URI="https://github.com/communi/libcommuni"
+EGIT_REPO_URI="git://github.com/communi/libcommuni.git"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -19,10 +19,12 @@ RDEPEND="dev-qt/qtcore:4
 	!icu? ( dev-libs/uchardet )"
 
 DEPEND="${RDEPEND}
-	test? ( dev-qt/qttest )"
+	test? ( dev-qt/qttest:4 )"
+	
+S=${WORKDIR}/${PN}
 
 src_prepare() {
-	UCHD=src/3rdparty/uchardet-0.0.1/uchardet.pri
+	UCHD=${S}/src/3rdparty/uchardet-0.0.1/uchardet.pri
 	echo "CONFIG *= link_pkgconfig" > "$UCHD"
 	echo "PKGCONFIG += uchardet" >> "$UCHD"
 	qt4-r2_src_prepare
