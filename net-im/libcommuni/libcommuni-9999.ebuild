@@ -14,12 +14,14 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="icu test"
 
-RDEPEND="dev-qt/qtcore
+RDEPEND="dev-qt/qtcore:4
 	icu? ( dev-libs/icu )
 	!icu? ( dev-libs/uchardet )"
 
 DEPEND="${RDEPEND}
 	test? ( dev-qt/qttest )"
+	
+S=${WORKDIR}/${PN}
 
 src_prepare() {
 	UCHD="${S}"/src/3rdparty/uchardet-0.0.1/uchardet.pri
