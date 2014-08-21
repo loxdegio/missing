@@ -7,7 +7,7 @@ inherit qt4-r2
 
 DESCRIPTION="A cross-platform IRC framework written with Qt 4"
 HOMEPAGE="http://communi.github.io/"
-EGIT_REPO_URI="git://github.com/communi/libcommuni"
+EGIT_REPO_URI="https://github.com/communi/libcommuni.git"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
