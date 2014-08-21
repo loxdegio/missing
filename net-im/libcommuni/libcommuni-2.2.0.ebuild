@@ -1,7 +1,8 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Header: $
 
-EAPI=5
+EAPI=4
 
 inherit qt4-r2
 
@@ -30,6 +31,6 @@ src_prepare() {
 
 src_configure() {
 	eqmake4 libcommuni.pro -config no_examples -config no_rpath \
-		$(use icu && echo "-config icu" || echo "-config no_icu") \
+		$(use icu || echo "-config no_icu") \
 		$(use test || echo "-config no_tests")
 }
