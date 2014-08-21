@@ -5,9 +5,9 @@ EAPI=5
 
 inherit qt4-r2
 
-DESCRIPTION="BitTorrent, Gnutella and edk2 client in C++ and Qt"
+DESCRIPTION="BitTorrent, Gnutella and ed2k client in C++ and Qt"
 HOMEPAGE="http://quazaa.sourceforge.net/"
-EGIT_REPO_URI="git://git.code.sf.net/p/quazaa/gitcode quazaa-gitcode"
+EGIT_REPO_URI="git://git.code.sf.net/p/quazaa/gitcode"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -15,7 +15,7 @@ KEYWORDS="~amd64 ~x86"
 
 IUSE="dbus debug geoip X"
 
-# geoip and python are runtime deps only (see INSTALL file)
+# geoip is runtime dep only (see INSTALL file)
 CDEPEND="
 	dev-libs/boost:=
 	dev-qt/qtcore:4
@@ -32,7 +32,7 @@ RDEPEND="${CDEPEND}
 	geoip? ( dev-libs/geoip )
 "
 
-S=${WORKDIR}/${MY_P}
+#S=${WORKDIR}
 DOCS=(AUTHORS Changelog README TODO)
 
 src_configure() {
