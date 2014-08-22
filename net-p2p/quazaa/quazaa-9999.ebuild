@@ -36,6 +36,21 @@ RDEPEND="${CDEPEND}
 S=${WORKDIR}/${MY_P}
 DOCS=(AUTHORS Changelog README TODO)
 
+src_unpack() {
+	unpack ${A}
+}
+
 src_configure() {
 	eqmake4
+}
+
+src_test() {
+	Xemake check-TESTS
+}
+
+src_install() {
+	default
+
+	# Punt useless libtool's .la files
+	find "${D}" -name '*.la' -delete
 }
