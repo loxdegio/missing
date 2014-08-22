@@ -19,7 +19,7 @@ IUSE="dbus debug geoip X"
 CDEPEND="
 	dev-libs/boost:=
 	dev-qt/qtcore
-	dev-qt/qtmultimedia
+	dev-qt/qt-mobility
 	>=dev-qt/qtsingleapplication-2.6.1_p20130904-r1[X?]
 	>=net-libs/rb_libtorrent-0.16.10
 	dbus? ( dev-qt/qtdbus )
