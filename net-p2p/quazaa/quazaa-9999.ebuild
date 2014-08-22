@@ -35,6 +35,7 @@ RDEPEND="${CDEPEND}
 DOCS=(AUTHORS Changelog README TODO)
 
 src_configure() {
+	epatch "${FILESDIR}/${PN}-noqt5.patch"
 	eqmake4
 }
 
