@@ -12,3 +12,21 @@
  #include <QAbstractTextDocumentLayout>
  #include <QDesktopServices>
  #include <QTextBlock>
+ @@ -285,9 +285,17 @@ void MessageView::showHelp(const QString
+ void MessageView::sendMessage(const QString& line)
+ {
+     if (d.messageTimer->isActive()) {
++#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
++		d.messages.append(line.split(QRegExp("[\\r\\n]"), QString::KeepEmptyParts));
++#else
+         d.messages.append(line.split(QRegularExpression("[\\r\\n]"), QString::KeepEmptyParts));
++#endif
+     } else {
++#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
++		d.messages = line.split(QRegExp("[\\r\\n]"), QString::KeepEmptyParts);
++#else
+         d.messages = line.split(QRegularExpression("[\\r\\n]"), QString::KeepEmptyParts);
++#endif
+         sendMessageLine();
+         d.messageTimer->start(1000);
+     }
