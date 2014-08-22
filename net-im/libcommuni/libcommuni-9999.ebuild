@@ -1,14 +1,13 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 2014 loxdegio
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI=4
 
-inherit qt4-r2
+inherit qt4-r2 git-2
 
 DESCRIPTION="A cross-platform IRC framework written with Qt 4"
 HOMEPAGE="http://communi.github.io/"
-SRC_URI="https://github.com/communi/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+EGIT_REPO_URI="https://github.com/communi/libcommuni"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
