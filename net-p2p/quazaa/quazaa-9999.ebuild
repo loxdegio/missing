@@ -38,6 +38,7 @@ src_configure() {
 	epatch "${FILESDIR}/${PN}-soundnotification-qt4qt5.patch"
 	epatch "${FILESDIR}/${PN}-messageview-qt4qt5.1.patch"
 	epatch "${FILESDIR}/${PN}-messageview-qt4qt5.2.patch"
+	epatch "${FILESDIR}/${PN}-messagehandler.patch"
 	eqmake4
 }
 

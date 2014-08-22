@@ -1,0 +1,11 @@
+--- Quazaa/3rdparty/communi-desktop/src/core/messagehandler.cpp	2014-08-22 13:12:10.985088012 +0200
++++ Quazaa/3rdparty/communi-desktop/src/core/messagehandler.cpp	2014-08-22 13:24:41.840118310 +0200
+@@ -339,7 +339,7 @@ void MessageHandler::handleTopicMessage(
+ 
+ void MessageHandler::handleWhoReplyMessage(IrcWhoReplyMessage *message)
+ {
+-    sendMessage(message, message->channel());
++    sendMessage(message, message->mask());
+ }
+ 
+ void MessageHandler::handleUnknownMessage(IrcMessage* message)
