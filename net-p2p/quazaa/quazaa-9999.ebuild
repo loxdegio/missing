@@ -35,7 +35,8 @@ RDEPEND="${CDEPEND}
 DOCS=(AUTHORS Changelog README TODO)
 
 src_configure() {
-	epatch "${FILESDIR}/${PN}-noqt5.patch"
+	epatch "${FILESDIR}/${PN}-soundnotification-qt4qt5.patch"
+	epatch "${FILESDIR}/${PN}-messageview-qt4qt5.patch"
 	eqmake4
 }
 
