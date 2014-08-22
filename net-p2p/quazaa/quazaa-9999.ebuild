@@ -18,11 +18,12 @@ IUSE="dbus debug geoip X"
 # geoip is runtime dep only (see INSTALL file)
 CDEPEND="
 	dev-libs/boost:=
-	dev-qt/qtcore:4
+	dev-qt/qtcore
+	dev-qt/qtmultimedia
 	>=dev-qt/qtsingleapplication-2.6.1_p20130904-r1[X?]
 	>=net-libs/rb_libtorrent-0.16.10
-	dbus? ( dev-qt/qtdbus:4 )
-	X? ( dev-qt/qtgui:4 )
+	dbus? ( dev-qt/qtdbus )
+	X? ( dev-qt/qtgui )
 "
 DEPEND="${CDEPEND}
 	virtual/pkgconfig
