@@ -7,8 +7,7 @@ inherit qt4-r2 git-2
 
 DESCRIPTION="BitTorrent, Gnutella and ed2k client in C++ and Qt"
 HOMEPAGE="http://quazaa.sourceforge.net/"
-MY_P="gitcode"
-EGIT_REPO_URI="git://git.code.sf.net/p/${PN}/${MY_P}"
+EGIT_REPO_URI="git://git.code.sf.net/p/${PN}/gitcode"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -33,12 +32,7 @@ RDEPEND="${CDEPEND}
 	geoip? ( dev-libs/geoip )
 "
 
-S=${WORKDIR}/${MY_P}
 DOCS=(AUTHORS Changelog README TODO)
-
-src_unpack() {
-	unpack ${A}
-}
 
 src_configure() {
 	eqmake4
