@@ -3,7 +3,7 @@
 
 EAPI=5
 
-inherit qt4-r2
+inherit qt4-r2 git-2
 
 DESCRIPTION="BitTorrent, Gnutella and ed2k client in C++ and Qt"
 HOMEPAGE="http://quazaa.sourceforge.net/"
