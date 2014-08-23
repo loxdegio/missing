@@ -35,3 +35,12 @@ src_install() {
 		doins ${S}/3.7/wacom_w8001.ko;
 	fi
 }
+
+pkg_postrm() {
+	if [ -f /lib/modules/`uname -r`/kernel/drivers/input/tablet/wacom.ko ]; then
+		rm -f /lib/modules/`uname -r`/kernel/drivers/input/tablet/wacom.ko;
+	fi
+	if [ -f /lib/modules/`uname -r`/kernel/drivers/input/touchscreen/wacom_w8001.ko ]; then
+		rm -f /lib/modules/`uname -r`/kernel/drivers/input/touchscreen/wacom_w8001.ko;
+	fi
+}
