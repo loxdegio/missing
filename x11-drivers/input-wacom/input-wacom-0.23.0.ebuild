@@ -15,8 +15,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-CONFIG_CHECK="TABLET_USB_WACOM"
-ERROR_X86_ACPI_CPUFREQ="CONFIG_TABLET_USB_WACOM has to be enabled to use wacom tablets"
+CONFIG_CHECK="~TABLET_USB_WACOM"
+ERROR_TABLET_USB_WACOM="CONFIG_TABLET_USB_WACOM has to be enabled to use wacom tablets"
 
 MODULE_NAMES="wacom()
 			  wacom_w8001()"
@@ -25,9 +25,11 @@ BUILD_TARGETS="all"
 
 src_install() {
 	if [ -d /lib/modules/`uname -r`/kernel/drivers/input/tablet ]; then
-		install -c ${S}/3.7/wacom.ko /lib/modules/`uname -r`/kernel/drivers/input/tablet;
+		insinto /lib/modules/`uname -r`/kernel/drivers/input/tablet;
+		doins ${S}/3.7/wacom.ko;
 	fi
 	if [ -d /lib/modules/`uname -r`/kernel/drivers/input/touchscreen ]; then
-		install -c ${S}/3.7/wacom_w8001.ko /lib/modules/`uname -r`/kernel/drivers/input/tablet;
+		insinto /lib/modules/`uname -r`/kernel/drivers/input/touchscreen;
+		doins ${S}/3.7/wacom_w8001.ko;
 	fi
 }
