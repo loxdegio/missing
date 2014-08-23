@@ -15,8 +15,11 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-MODULE_NAMES="wacom(misc:)
-			  wacom_w8001(misc:)"
+CONFIG_CHECK="TABLET_USB_WACOM"
+ERROR_X86_ACPI_CPUFREQ="CONFIG_TABLET_USB_WACOM has to be enabled to use wacom tablets"
+
+MODULE_NAMES="wacom()
+			  wacom_w8001()"
 BUILD_PARAMS="KERNELSRC=\"${KERNEL_DIR}\" -j1"
 BUILD_TARGETS="all"
 
