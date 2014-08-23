@@ -19,3 +19,12 @@ MODULE_NAMES="wacom(misc:)
 			  wacom_w8001(misc:)"
 BUILD_PARAMS="KERNELSRC=\"${KERNEL_DIR}\" -j1"
 BUILD_TARGETS="all"
+
+src_install() {
+	if [ -d /lib/modules/`uname -r`/kernel/drivers/input/tablet ]; then
+		install -c ${S}/3.7/wacom.ko /lib/modules/`uname -r`/kernel/drivers/input/tablet;
+	fi
+	if [ -d /lib/modules/`uname -r`/kernel/drivers/input/touchscreen ]; then
+		install -c ${S}/3.7/wacom_w8001.ko /lib/modules/`uname -r`/kernel/drivers/input/tablet;
+	fi
+}
