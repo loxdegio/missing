@@ -13,7 +13,7 @@ SRC_URI="http://sourceforge.net/projects/linuxwacom/files/xf86-${PN}/${PN}/${P}.
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="tools X multilib"
 
 CONFIG_CHECK="~TABLET_USB_WACOM
 			  ~TOUCHSCREEN_WACOM_W8001"
@@ -24,6 +24,24 @@ MODULE_NAMES="wacom()
 			  wacom_w8001()"
 BUILD_PARAMS="KERNELSRC=\"${KERNEL_DIR}\" -j1"
 BUILD_TARGETS="all"
+
+DEPEND="tools? ( x11-libs/libX11
+				 x11-libs/libXext
+				 virtual/libudev
+		)
+		X? ( x11-base/xorg-server
+			 x11-drivers/xf86-input-wacom 
+			 multilib? (
+			 || (
+				 (
+					>=x11-libs/libX11-1.6.2[abi_x86_32]
+					>=x11-libs/libXext-1.3.2[abi_x86_32]
+				 )
+				app-emulation/emul-linux-x86-xlibs
+			 )
+		     )
+		)
+		kernel_linux? ( virtual/linux-sources )"
 
 src_install() {
 	if [ -d /lib/modules/`uname -r`/kernel/drivers/input/tablet ]; then
@@ -38,9 +56,9 @@ src_install() {
 
 pkg_postrm() {
 	if [ -f /lib/modules/`uname -r`/kernel/drivers/input/tablet/wacom.ko ]; then
-		rm -f /lib/modules/`uname -r`/kernel/drivers/input/tablet/wacom.ko;
+		rm /lib/modules/`uname -r`/kernel/drivers/input/tablet/wacom.ko;
 	fi
 	if [ -f /lib/modules/`uname -r`/kernel/drivers/input/touchscreen/wacom_w8001.ko ]; then
-		rm -f /lib/modules/`uname -r`/kernel/drivers/input/touchscreen/wacom_w8001.ko;
+		rm /lib/modules/`uname -r`/kernel/drivers/input/touchscreen/wacom_w8001.ko;
 	fi
 }
