@@ -13,7 +13,7 @@ SRC_URI="http://sourceforge.net/projects/linuxwacom/files/xf86-${PN}/${PN}/${P}.
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="tools X multilib"
+IUSE="input_devices_wacom tools X multilib +kernel_linux"
 
 CONFIG_CHECK="~TABLET_USB_WACOM
 			  ~TOUCHSCREEN_WACOM_W8001"
