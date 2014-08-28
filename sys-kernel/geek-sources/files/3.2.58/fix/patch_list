@@ -1,0 +1,4 @@
+change-default-console-loglevel.patch
+
+2300_per-pci-device-msi-irq-listing.patch
+2600_Input-ALPS-synaptics-touchpad.patch

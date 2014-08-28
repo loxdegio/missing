@@ -1,0 +1,47 @@
+>From 9049f7932109f3fe189ffa8028f2e23f06a9bd0b Mon Sep 17 00:00:00 2001
+From: Tomas Winkler <tomas.winkler@intel.com>
+Date: Sun, 23 Jun 2013 19:49:04 +0000
+Subject: mei: check whether hw start has succeeded
+
+hw start may fail therefore the reset flow has
+to check for the return value
+
+Signed-off-by: Tomas Winkler <tomas.winkler@intel.com>
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+---
+diff --git a/drivers/misc/mei/init.c b/drivers/misc/mei/init.c
+index 1525388..6fc573c 100644
+--- a/drivers/misc/mei/init.c
++++ b/drivers/misc/mei/init.c
+@@ -181,7 +181,12 @@ void mei_reset(struct mei_device *dev, int interrupts_enabled)
+ 		return;
+ 	}
+ 
+-	mei_hw_start(dev);
++	ret = mei_hw_start(dev);
++	if (ret) {
++		dev_err(&dev->pdev->dev, "hw_start failed disabling the device\n");
++		dev->dev_state = MEI_DEV_DISABLED;
++		return;
++	}
+ 
+ 	dev_dbg(&dev->pdev->dev, "link is established start sending messages.\n");
+ 	/* link is established * start sending messages.  */
+diff --git a/drivers/misc/mei/mei_dev.h b/drivers/misc/mei/mei_dev.h
+index 1aa4997..7b918b2 100644
+--- a/drivers/misc/mei/mei_dev.h
++++ b/drivers/misc/mei/mei_dev.h
+@@ -544,9 +544,9 @@ static inline int mei_hw_reset(struct mei_device *dev, bool enable)
+ 	return dev->ops->hw_reset(dev, enable);
+ }
+ 
+-static inline void mei_hw_start(struct mei_device *dev)
++static inline int mei_hw_start(struct mei_device *dev)
+ {
+-	dev->ops->hw_start(dev);
++	return dev->ops->hw_start(dev);
+ }
+ 
+ static inline void mei_clear_interrupts(struct mei_device *dev)
+--
+cgit v0.9.2

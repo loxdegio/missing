@@ -1,0 +1,39 @@
+change-default-console-loglevel.patch
+
+# Some chips detect a ghost TV output
+# mailing list discussion: http://lists.freedesktop.org/archives/intel-gfx/2011-April/010371.html
+# Arch Linux bug report: FS#19234
+#
+# It is unclear why this patch wasn't merged upstream, it was accepted,
+# then dropped because the reasoning was unclear. However, it is clearly
+# needed.
+i915-fix-ghost-tv-output.patch
+
+# Fix backlight control on some laptops:
+# https://bugzilla.kernel.org/show_bug.cgi?id=43168
+3.4.4-fix-backlight-regression.patch
+
+# Patch submitted upstream, waiting for inclusion:
+# https://lkml.org/lkml/2012/2/19/51
+# add support for latest bios of Acer 1810T acerhdf module
+fix-acerhdf-1810T-bios.patch
+
+# fix module initialisation
+# https://bugs.archlinux.org/task/32122
+3.4-module-symbol-waiting.patch
+3.4-module-init-wait.patch
+
+# fix dvb issues
+# see: http://forum.manjaro.org/index.php?topic=1108.0
+3.4.21-Fix-DVB-ioctls-failing-if-frontend-open-closed-too-fast.patch
+
+# fix cosmetic fat issue
+# https://bugs.archlinux.org/task/32916
+3.4.23-fat.patch
+
+2400_kcopy-patch-for-infiniband-driver.patch
+ata-prefer-ata-drivers-over-ide-drivers-when-both-are-built.patch
+cpufreq_ondemand_performance_optimise_default_settings.patch
+FX01-fix-serious-progressive-ext4-data-corruption-bug.patch
+net-wireless-ath9k-testfix.patch
+net-wireless-rt2800usb_disable_ps.patch
