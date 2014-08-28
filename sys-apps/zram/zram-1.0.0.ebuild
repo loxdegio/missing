@@ -33,19 +33,17 @@ src_install() {
 		doins ${S}/zram.service;
 		
 		insinto /usr/sbin;
-		doins ${S}/zramstart;
-		doins ${S}/zramstop;
+		doexe ${S}/zramstart;
+		doexe ${S}/zramstop;
 		
 		insinto /usr/bin;
-		doins ${S}/zramstat;
+		doexe ${S}/zramstat;
 		
 		if [ ! -d /etc/sysconfig ]; then
-			dodir /etc/sysconfig
-		fi
+			dodir /etc/sysconfig;
+		fi;
 		insinto /etc/sysconfig
-		doins ${S}/zram;
-			
-			
+		doins ${S}/zram;			
 	else 
 		die "Systemd not installed"
 	fi
@@ -68,7 +66,10 @@ pkg_postrm() {
 		rm /usr/sbin/zramstat;
 	fi
 	
-	if [ -f /etc/sysconfig/zram ]; then
-		rm /etc/sysconfig/zram;
+	if [ -d /etc/sysconfig ];then
+		if [ -f /etc/sysconfig/zram ]; then
+			rm /etc/sysconfig/zram;
+		fi;
+		rmdir /etc/sysconfig;
 	fi
 }
