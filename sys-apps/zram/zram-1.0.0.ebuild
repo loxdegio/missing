@@ -29,20 +29,20 @@ pkg_setup() {
 
 src_install() {
 	if [ -d /usr/lib/systemd/system ]; then
-		insinto /usr/lib/systemd/system;
+		insinto /usr/lib/systemd/system/;
 		doins ${S}/zram.service;
 		
-		insinto /usr/sbin;
+		insinto /usr/sbin/;
 		doexe ${S}/zramstart;
 		doexe ${S}/zramstop;
 		
-		insinto /usr/bin;
+		insinto /usr/bin/;
 		doexe ${S}/zramstat;
 		
 		if [ ! -d /etc/sysconfig ]; then
 			dodir /etc/sysconfig;
 		fi;
-		insinto /etc/sysconfig
+		insinto /etc/sysconfig/
 		doins ${S}/zram;			
 	else 
 		die "Systemd not installed"
