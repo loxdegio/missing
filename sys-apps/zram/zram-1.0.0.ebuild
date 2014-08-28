@@ -32,14 +32,12 @@ src_install() {
 		insinto /usr/lib/systemd/system/;
 		doins ${S}/zram.service;
 		
-		insinto /usr/sbin/;
-		insopts '-m 755';
+		into /usr/sbin/;
 		dosbin ${S}/zramstart;
 		dosbin ${S}/zramstop;
 		
-		insinto /usr/bin/;
-		insopts '-m 755';
-		doins ${S}/zramstat;
+		exeinto /usr/bin/;
+		doexe ${S}/zramstat;
 		
 		if [ ! -d /etc/sysconfig ]; then
 			dodir /etc/sysconfig;
