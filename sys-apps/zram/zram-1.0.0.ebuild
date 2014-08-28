@@ -40,7 +40,7 @@ src_install() {
 		doins ${S}/zramstat;
 		
 		if [ ! -d /etc/sysconfig ]; then
-			mkdir /etc/sysconfig
+			dodir /etc/sysconfig
 		fi
 		insinto /etc/sysconfig
 		doins ${S}/zram;
