@@ -14,7 +14,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~arm"
 
-DEPEND="sys-apps/systemd"
+DEPEND=""
 
 CONFIG_CHECK="ZRAM"
 ERROR_ZRAM="CONFIG_ZRAM has to be configured at least Module to enable the activation of zram device(s)."
@@ -24,5 +24,51 @@ pkg_setup() {
 		eerror "${PN} isn't supported by version of installed kernel."
 		eerror "Please use a newer kernel. At least linux 2.6.37.1"
 		die
+	fi
+}
+
+src_install() {
+	if [ -d /usr/lib/systemd/system ]; then
+		insinto /usr/lib/systemd/system;
+		doins ${S}/zram.service;
+		
+		insinto /usr/sbin;
+		doins ${S}/zramstart;
+		doins ${S}/zramstop;
+		
+		insinto /usr/bin;
+		doins ${S}/zramstat;
+		
+		if [ ! -d /etc/sysconfig ]; then
+			mkdir /etc/sysconfig
+		fi
+		insinto /etc/sysconfig
+		doins ${S}/zram;
+			
+			
+	else 
+		die "Systemd not installed"
+	fi
+}
+
+pkg_postrm() {
+	if [ -f /usr/lib/systemd/system/zram.service ]; then
+		rm /usr/lib/systemd/system/zram.service;
+	fi
+	
+	if [ -f /usr/sbin/zramstart ]; then
+		rm /usr/sbin/zramstart;
+	fi
+	
+	if [ -f /usr/sbin/zramstop ]; then
+		rm /usr/sbin/zramstop;
+	fi
+	
+	if [ -f /usr/sbin/zramstat ]; then
+		rm /usr/sbin/zramstat;
+	fi
+	
+	if [ -f /etc/sysconfig/zram ]; then
+		rm /etc/sysconfig/zram;
 	fi
 }
