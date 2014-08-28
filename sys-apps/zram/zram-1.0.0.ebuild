@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit linux-info linux-mod eutils
+inherit linux-info eutils
 
 DESCRIPTION="ZRAM service for Systemd"
 HOMEPAGE="" 
