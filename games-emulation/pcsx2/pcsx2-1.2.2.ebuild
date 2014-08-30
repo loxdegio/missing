@@ -41,8 +41,7 @@ RDEPEND="
 	x11-libs/libICE
 	x11-libs/libX11
 	x11-libs/libXext
-	x86? ( x11-libs/wxGTK:2.8[X] )
-	amd64? ( app-emulation/emul-linux-x86-wxGTK )
+	x11-libs/wxGTK:2.8[X]
 	>=sys-libs/zlib-1.2.4
 
 	video? (
