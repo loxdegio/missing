@@ -76,6 +76,10 @@ if [[ ${PV} == "1.2.2" ]]; then
 	PATCHES+=("${FILESDIR}"/cg-multilib.patch)
 fi
 
+append-cflags(){
+	export CFLAGS="${CFLAGS} -I/usr/lib64/wx/include/gtk2-unicode-release-2.8 -I/usr/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread"
+}
+
 src_prepare() {	
 	/usr/bin/wx-config  --version=2.8 --static=no --unicode=yes --debug=yes --cflags || die
 	cmake-utils_src_prepare
