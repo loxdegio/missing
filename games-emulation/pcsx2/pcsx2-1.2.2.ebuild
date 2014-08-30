@@ -77,7 +77,8 @@ if [[ ${PV} == "1.2.2" ]]; then
 	PATCHES+=("${FILESDIR}"/cg-multilib.patch)
 fi
 
-src_prepare() {
+src_prepare() {	
+	/usr/bin/wx-config  --version=2.8 --static=no --unicode=yes --debug=yes --cflags || die
 	cmake-utils_src_prepare
 
 	if ! use egl; then
