@@ -28,7 +28,7 @@ pkg_setup() {
 }
 
 src_install() {
-	einstall
+	einstall install_prefix=${D}
 }
 
 pkg_postrm() {
