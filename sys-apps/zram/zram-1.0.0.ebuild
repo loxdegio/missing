@@ -33,9 +33,9 @@ src_install() {
 		doins zram.service;
 		
 		if [ -d /usr/sbin ]; then
-			into /usr;
-			dosbin zramstart;
-			dosbin zramstop;
+			exeinto /usr/sbin;
+			doexe zramstart;
+			doexe zramstop;
 		fi;
 		
 		if [ -d /usr/bin ]; then
