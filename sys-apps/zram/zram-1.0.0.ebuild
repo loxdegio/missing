@@ -29,6 +29,28 @@ pkg_setup() {
 
 src_install() {
 	einstall install_prefix=${D}
+	
+	if [ -d /usr/lib/systemd/system ]; then
+		insinto /usr/lib/systemd/system;
+		doins ${D}/usr/lib/systemd/system/zram.service;
+		
+		if [ -d /usr/sbin ]; then
+			into /usr/sbin;
+			dosbin ${D}/usr/sbin/zramstart;
+			dosbin ${D}/usr/sbin/zramstop;
+		fi;
+		
+		if [ -d /usr/bin ]; then
+			exeinto /usr/bin;
+			doexe ${D}/usr/sbin/zramstat;
+		fi;
+		
+		if [ ! -d /etc/sysconfig ];then
+			dodir /etc/sysconfig;
+		fi;			
+		insinto /etc/sysconfig;
+		doins ${D}/etc/sysconfig/zram;
+	fi;		
 }
 
 pkg_postrm() {
