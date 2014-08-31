@@ -33,7 +33,7 @@ src_install() {
 		doins zram.service;
 		
 		if [ -d /usr/sbin ]; then
-			into /usr/sbin;
+			into /usr;
 			dosbin zramstart;
 			dosbin zramstop;
 		fi;
