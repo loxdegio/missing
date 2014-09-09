@@ -52,7 +52,7 @@ IUSE="
 ARM_CPU_FEATURES="armv5te armv6 armv6t2 neon armvfp:vfp"
 MIPS_CPU_FEATURES="mips32r2 mipsdspr1 mipsdspr2 mipsfpu"
 PPC_CPU_FEATURES="altivec"
-X86_CPU_FEATURES="3dnow amd3dnow 3dnowext amd3dnowext avx avx2 fma3 fma4 mmx mmxext sse sse2 sse3 ssse3 sse4 sse4_2 xop"
+X86_CPU_FEATURES="3dnow:amd3dnow 3dnowext:amd3dnowext avx avx2 fma3 fma4 mmx mmxext sse sse2 sse3 ssse3 sse4 sse4_2:sse42 xop"
 
 # String for CPU features in the useflag[:configure_option] form
 # if :configure_option isn't set, it will use 'useflag' as configure option
@@ -64,7 +64,7 @@ CPU_FEATURES="
 "
 
 for i in ${CPU_FEATURES}; do
-	IUSE="${IUSE} ${i}"
+	IUSE="${IUSE} ${i%:*}"
 done
 
 FFTOOLS="aviocat cws2fws ffescape ffeval ffhash fourcc2pixfmt graph2dot ismindex pktdumper qt-faststart trasher"
@@ -272,7 +272,7 @@ multilib_src_configure() {
 
 	# CPU features
 	for i in ${CPU_FEATURES}; do
-		use ${i} && myconf+=( --enable-${i} )
+		use ${i%:*} && myconf+=( --enable-${i#*:} )
 	done
 	if use pic ; then
 		myconf+=( --enable-pic )
