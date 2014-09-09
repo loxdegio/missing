@@ -272,13 +272,7 @@ multilib_src_configure() {
 
 	# CPU features
 	for i in ${CPU_FEATURES}; do
-		if use ${i}; then
-			[[ ${i} == '3dnow' ]] && myconf+=( --enable-amd${i} ) && continue;
-			[[ ${i} == '3dnowext' ]] && myconf+=( --disable-amd${i} ) && continue;
-			[[ ${i} == 'sse4_2' ]] && myconf+=( --enable-sse42 ) && continue;
-			[[ ${i} == 'armvfp' ]] && myconf+=( --enable-vfp ) && continue;
-			myconf+=( --enable-${i} );
-		else
+		if use !${i}; then
 			[[ ${i} == '3dnow' ]] && myconf+=( --disable-amd${i} ) && continue;
 			[[ ${i} == '3dnowext' ]] && myconf+=( --disable-amd${i} ) && continue;
 			[[ ${i} == 'sse4_2' ]] && myconf+=( --disable-sse42 ) && continue;
