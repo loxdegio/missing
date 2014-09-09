@@ -52,7 +52,7 @@ IUSE="
 ARM_CPU_FEATURES="armv5te armv6 armv6t2 neon armvfp:vfp"
 MIPS_CPU_FEATURES="mips32r2 mipsdspr1 mipsdspr2 mipsfpu"
 PPC_CPU_FEATURES="altivec"
-X86_CPU_FEATURES="3dnow:amd3dnow 3dnowext:amd3dnowext avx avx2 fma3 fma4 mmx mmxext sse sse2 sse3 ssse3 sse4 sse4_2:sse42 xop"
+X86_CPU_FEATURES="3dnow 3dnowext avx avx2 fma3 fma4 mmx mmxext sse sse2 sse3 ssse3 sse4 sse4_2 xop"
 
 # String for CPU features in the useflag[:configure_option] form
 # if :configure_option isn't set, it will use 'useflag' as configure option
@@ -272,7 +272,17 @@ multilib_src_configure() {
 
 	# CPU features
 	for i in ${CPU_FEATURES}; do
-		use ${i%:*} && myconf+=( --enable-${i#*:} )
+		if use ${i}; then
+			[[ ${i} == '3dnow' ]] && myconf+=( --enable-amd${i} ) && continue;
+			[[ ${i} == '3dnowext' ]] && myconf+=( --disable-amd${i} ) && continue;
+			[[ ${i} == 'sse4_2' ]] && myconf+=( --enable-sse42 ) && continue;
+			myconf+=( --enable-${i} );
+		else
+			[[ ${i} == '3dnow' ]] && myconf+=( --disable-amd${i} ) && continue;
+			[[ ${i} == '3dnowext' ]] && myconf+=( --disable-amd${i} ) && continue;
+			[[ ${i} == 'sse4_2' ]] && myconf+=( --disable-sse42 ) && continue;
+			myconf+=( --disable-${i} );
+		fi;
 	done
 	if use pic ; then
 		myconf+=( --enable-pic )
