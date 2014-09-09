@@ -49,7 +49,7 @@ IUSE="
 	vorbis vpx wavpack webp X x264 x265 xvid +zlib zvbi
 	"
 
-ARM_CPU_FEATURES="armv5te armv6 armv6t2 neon armvfp:vfp"
+ARM_CPU_FEATURES="armv5te armv6 armv6t2 neon armvfp"
 MIPS_CPU_FEATURES="mips32r2 mipsdspr1 mipsdspr2 mipsfpu"
 PPC_CPU_FEATURES="altivec"
 X86_CPU_FEATURES="3dnow 3dnowext avx avx2 fma3 fma4 mmx mmxext sse sse2 sse3 ssse3 sse4 sse4_2 xop"
@@ -64,7 +64,7 @@ CPU_FEATURES="
 "
 
 for i in ${CPU_FEATURES}; do
-	IUSE="${IUSE} ${i%:*}"
+	IUSE="${IUSE} ${i}"
 done
 
 FFTOOLS="aviocat cws2fws ffescape ffeval ffhash fourcc2pixfmt graph2dot ismindex pktdumper qt-faststart trasher"
@@ -276,11 +276,13 @@ multilib_src_configure() {
 			[[ ${i} == '3dnow' ]] && myconf+=( --enable-amd${i} ) && continue;
 			[[ ${i} == '3dnowext' ]] && myconf+=( --disable-amd${i} ) && continue;
 			[[ ${i} == 'sse4_2' ]] && myconf+=( --enable-sse42 ) && continue;
+			[[ ${i} == 'armvfp' ]] && myconf+=( --enable-vfp ) && continue;
 			myconf+=( --enable-${i} );
 		else
 			[[ ${i} == '3dnow' ]] && myconf+=( --disable-amd${i} ) && continue;
 			[[ ${i} == '3dnowext' ]] && myconf+=( --disable-amd${i} ) && continue;
 			[[ ${i} == 'sse4_2' ]] && myconf+=( --disable-sse42 ) && continue;
+			[[ ${i} == 'armvfp' ]] && myconf+=( --disable-vfp ) && continue;
 			myconf+=( --disable-${i} );
 		fi;
 	done
