@@ -64,7 +64,7 @@ CPU_FEATURES="
 "
 
 for i in ${CPU_FEATURES}; do
-	IUSE="${IUSE} ${i%:*}"
+	IUSE="${IUSE} ${i}"
 done
 
 FFTOOLS="aviocat cws2fws ffescape ffeval ffhash fourcc2pixfmt graph2dot ismindex pktdumper qt-faststart trasher"
