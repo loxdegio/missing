@@ -3,7 +3,7 @@
 
 EAPI=5
 
-inherit git-2
+inherit qt5 git-2
 
 DESCRIPTION="BitTorrent, Gnutella and ed2k client in C++ and Qt"
 HOMEPAGE="http://quazaa.sourceforge.net/"
@@ -35,7 +35,7 @@ RDEPEND="${CDEPEND}
 DOCS=(AUTHORS Changelog README TODO)
 
 src_configure() {
-	eqmake4
+	eqmake5
 }
 
 src_test() {
