@@ -3,7 +3,7 @@
 
 EAPI=5
 
-inherit qt4-r2 git-2
+inherit git-2
 
 DESCRIPTION="BitTorrent, Gnutella and ed2k client in C++ and Qt"
 HOMEPAGE="http://quazaa.sourceforge.net/"
@@ -18,12 +18,11 @@ IUSE="dbus debug geoip X"
 # geoip is runtime dep only (see INSTALL file)
 CDEPEND="
 	dev-libs/boost:=
-	dev-qt/qtcore
-	dev-qt/qt-mobility
+	dev-qt/qtcore:5
 	>=dev-qt/qtsingleapplication-2.6.1_p20130904-r1[X?]
 	>=net-libs/rb_libtorrent-0.16.10
-	dbus? ( dev-qt/qtdbus )
-	X? ( dev-qt/qtgui )
+	dbus? ( dev-qt/qtdbus:5 )
+	X? ( dev-qt/qtgui:5 )
 "
 DEPEND="${CDEPEND}
 	virtual/pkgconfig
@@ -36,10 +35,6 @@ RDEPEND="${CDEPEND}
 DOCS=(AUTHORS Changelog README TODO)
 
 src_configure() {
-	epatch "${FILESDIR}/${PN}-soundnotification-qt4qt5.patch"
-	epatch "${FILESDIR}/${PN}-messageview-qt4qt5.1.patch"
-	epatch "${FILESDIR}/${PN}-messageview-qt4qt5.2.patch"
-	epatch "${FILESDIR}/${PN}-messagehandler.patch"
 	eqmake4
 }
 
