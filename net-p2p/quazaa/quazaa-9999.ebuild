@@ -21,6 +21,7 @@ CDEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtmultimedia:5
 	dev-qt/qtwidgets:5
+	dev-qt/qtxml:5
 	>=dev-qt/qtsingleapplication-2.6.1_p20130904-r1[X?]
 	>=net-libs/rb_libtorrent-0.16.10
 	dev-qt/qtsql:5
