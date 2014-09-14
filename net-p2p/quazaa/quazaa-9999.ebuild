@@ -38,6 +38,10 @@ RDEPEND="${CDEPEND}
 
 DOCS=(AUTHORS Changelog README TODO)
 
+src_prepare(){
+	epatch "${FILESDIR}/Quazaa-lrelease.patch"
+}
+
 src_configure() {
 	eqmake5
 }
