@@ -12,7 +12,7 @@ SRC_URI="https://github.com/loxdegio/SystemdZramService/blob/master/${P}.tar.bz2
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~arm"
+KEYWORDS="~amd64 ~x86"
 
 DEPEND=""
 
@@ -28,27 +28,22 @@ pkg_setup() {
 }
 
 src_install() {
-	if [ -d /usr/lib/systemd/system ]; then
-		insinto /usr/lib/systemd/system;
-		doins zram.service;
-		
-		if [ -d /usr/sbin ]; then
-			exeinto /usr/sbin;
-			doexe zramstart;
-			doexe zramstop;
-		fi;
-		
-		if [ -d /usr/bin ]; then
-			exeinto /usr/bin;
-			doexe zramstat;
-		fi;
-		
-		if [ ! -d /etc/sysconfig ];then
-			dodir /etc/sysconfig;
-		fi;			
-		insinto /etc/sysconfig;
-		doins zram;
-	fi;		
+	dodir /usr/lib/systemd/system
+	insinto /usr/lib/systemd/system
+	doins zram.service
+	
+	dodir /usr/sbin
+	into /usr
+	dosbin zramstart
+	dosbin zramstop
+	
+	dodir /usr/bin
+	exeinto /usr/bin
+	doexe zramstat
+	
+	dodir /etc/sysconfig			
+	insinto /etc/sysconfig
+	doins zram
 }
 
 pkg_postrm() {
