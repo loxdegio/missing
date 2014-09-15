@@ -1,0 +1,132 @@
+diff -rupN quazaa-9999/Makefile quazaa-9999/Makefile
+--- quazaa-9999/Makefile	2014-09-13 19:00:12.642924663 +0200
++++ quazaa-9999/Makefile	2014-09-14 15:54:48.399534345 +0200
+@@ -1243,97 +1243,97 @@ compiler_updateqm_make_all: bin/quazaa_a
+ compiler_updateqm_clean:
+ 	-$(DEL_FILE) bin/quazaa_af.qm bin/quazaa_ar.qm bin/quazaa_ca.qm bin/quazaa_chs.qm bin/quazaa_cz.qm bin/quazaa_de.qm bin/quazaa_default_en.qm bin/quazaa_ee.qm bin/quazaa_es.qm bin/quazaa_fa.qm bin/quazaa_fi.qm bin/quazaa_fr.qm bin/quazaa_gr.qm bin/quazaa_heb.qm bin/quazaa_hr.qm bin/quazaa_hu.qm bin/quazaa_it.qm bin/quazaa_ja.qm bin/quazaa_lt.qm bin/quazaa_nl.qm bin/quazaa_no.qm bin/quazaa_pl.qm bin/quazaa_pt-br.qm bin/quazaa_pt.qm bin/quazaa_ru.qm bin/quazaa_sl-si.qm bin/quazaa_sq.qm bin/quazaa_sr.qm bin/quazaa_sv.qm bin/quazaa_tr.qm bin/quazaa_tw.qm
+ bin/quazaa_af.qm: Language/quazaa_af.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_af.ts -qm ./bin/quazaa_af.qm
++	/usr/bin/lrelease Language/quazaa_af.ts -qm ./bin/quazaa_af.qm
+ 
+ bin/quazaa_ar.qm: Language/quazaa_ar.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_ar.ts -qm ./bin/quazaa_ar.qm
++	/usr/bin/lrelease Language/quazaa_ar.ts -qm ./bin/quazaa_ar.qm
+ 
+ bin/quazaa_ca.qm: Language/quazaa_ca.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_ca.ts -qm ./bin/quazaa_ca.qm
++	/usr/bin/lrelease Language/quazaa_ca.ts -qm ./bin/quazaa_ca.qm
+ 
+ bin/quazaa_chs.qm: Language/quazaa_chs.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_chs.ts -qm ./bin/quazaa_chs.qm
++	/usr/bin/lrelease Language/quazaa_chs.ts -qm ./bin/quazaa_chs.qm
+ 
+ bin/quazaa_cz.qm: Language/quazaa_cz.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_cz.ts -qm ./bin/quazaa_cz.qm
++	/usr/bin/lrelease Language/quazaa_cz.ts -qm ./bin/quazaa_cz.qm
+ 
+ bin/quazaa_de.qm: Language/quazaa_de.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_de.ts -qm ./bin/quazaa_de.qm
++	/usr/bin/lrelease Language/quazaa_de.ts -qm ./bin/quazaa_de.qm
+ 
+ bin/quazaa_default_en.qm: Language/quazaa_default_en.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_default_en.ts -qm ./bin/quazaa_default_en.qm
++	/usr/bin/lrelease Language/quazaa_default_en.ts -qm ./bin/quazaa_default_en.qm
+ 
+ bin/quazaa_ee.qm: Language/quazaa_ee.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_ee.ts -qm ./bin/quazaa_ee.qm
++	/usr/bin/lrelease Language/quazaa_ee.ts -qm ./bin/quazaa_ee.qm
+ 
+ bin/quazaa_es.qm: Language/quazaa_es.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_es.ts -qm ./bin/quazaa_es.qm
++	/usr/bin/lrelease Language/quazaa_es.ts -qm ./bin/quazaa_es.qm
+ 
+ bin/quazaa_fa.qm: Language/quazaa_fa.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_fa.ts -qm ./bin/quazaa_fa.qm
++	/usr/bin/lrelease Language/quazaa_fa.ts -qm ./bin/quazaa_fa.qm
+ 
+ bin/quazaa_fi.qm: Language/quazaa_fi.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_fi.ts -qm ./bin/quazaa_fi.qm
++	/usr/bin/lrelease Language/quazaa_fi.ts -qm ./bin/quazaa_fi.qm
+ 
+ bin/quazaa_fr.qm: Language/quazaa_fr.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_fr.ts -qm ./bin/quazaa_fr.qm
++	/usr/bin/lrelease Language/quazaa_fr.ts -qm ./bin/quazaa_fr.qm
+ 
+ bin/quazaa_gr.qm: Language/quazaa_gr.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_gr.ts -qm ./bin/quazaa_gr.qm
++	/usr/bin/lrelease Language/quazaa_gr.ts -qm ./bin/quazaa_gr.qm
+ 
+ bin/quazaa_heb.qm: Language/quazaa_heb.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_heb.ts -qm ./bin/quazaa_heb.qm
++	/usr/bin/lrelease Language/quazaa_heb.ts -qm ./bin/quazaa_heb.qm
+ 
+ bin/quazaa_hr.qm: Language/quazaa_hr.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_hr.ts -qm ./bin/quazaa_hr.qm
++	/usr/bin/lrelease Language/quazaa_hr.ts -qm ./bin/quazaa_hr.qm
+ 
+ bin/quazaa_hu.qm: Language/quazaa_hu.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_hu.ts -qm ./bin/quazaa_hu.qm
++	/usr/bin/lrelease Language/quazaa_hu.ts -qm ./bin/quazaa_hu.qm
+ 
+ bin/quazaa_it.qm: Language/quazaa_it.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_it.ts -qm ./bin/quazaa_it.qm
++	/usr/bin/lrelease Language/quazaa_it.ts -qm ./bin/quazaa_it.qm
+ 
+ bin/quazaa_ja.qm: Language/quazaa_ja.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_ja.ts -qm ./bin/quazaa_ja.qm
++	/usr/bin/lrelease Language/quazaa_ja.ts -qm ./bin/quazaa_ja.qm
+ 
+ bin/quazaa_lt.qm: Language/quazaa_lt.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_lt.ts -qm ./bin/quazaa_lt.qm
++	/usr/bin/lrelease Language/quazaa_lt.ts -qm ./bin/quazaa_lt.qm
+ 
+ bin/quazaa_nl.qm: Language/quazaa_nl.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_nl.ts -qm ./bin/quazaa_nl.qm
++	/usr/bin/lrelease Language/quazaa_nl.ts -qm ./bin/quazaa_nl.qm
+ 
+ bin/quazaa_no.qm: Language/quazaa_no.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_no.ts -qm ./bin/quazaa_no.qm
++	/usr/bin/lrelease Language/quazaa_no.ts -qm ./bin/quazaa_no.qm
+ 
+ bin/quazaa_pl.qm: Language/quazaa_pl.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_pl.ts -qm ./bin/quazaa_pl.qm
++	/usr/bin/lrelease Language/quazaa_pl.ts -qm ./bin/quazaa_pl.qm
+ 
+ bin/quazaa_pt-br.qm: Language/quazaa_pt-br.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_pt-br.ts -qm ./bin/quazaa_pt-br.qm
++	/usr/bin/lrelease Language/quazaa_pt-br.ts -qm ./bin/quazaa_pt-br.qm
+ 
+ bin/quazaa_pt.qm: Language/quazaa_pt.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_pt.ts -qm ./bin/quazaa_pt.qm
++	/usr/bin/lrelease Language/quazaa_pt.ts -qm ./bin/quazaa_pt.qm
+ 
+ bin/quazaa_ru.qm: Language/quazaa_ru.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_ru.ts -qm ./bin/quazaa_ru.qm
++	/usr/bin/lrelease Language/quazaa_ru.ts -qm ./bin/quazaa_ru.qm
+ 
+ bin/quazaa_sl-si.qm: Language/quazaa_sl-si.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_sl-si.ts -qm ./bin/quazaa_sl-si.qm
++	/usr/bin/lrelease Language/quazaa_sl-si.ts -qm ./bin/quazaa_sl-si.qm
+ 
+ bin/quazaa_sq.qm: Language/quazaa_sq.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_sq.ts -qm ./bin/quazaa_sq.qm
++	/usr/bin/lrelease Language/quazaa_sq.ts -qm ./bin/quazaa_sq.qm
+ 
+ bin/quazaa_sr.qm: Language/quazaa_sr.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_sr.ts -qm ./bin/quazaa_sr.qm
++	/usr/bin/lrelease Language/quazaa_sr.ts -qm ./bin/quazaa_sr.qm
+ 
+ bin/quazaa_sv.qm: Language/quazaa_sv.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_sv.ts -qm ./bin/quazaa_sv.qm
++	/usr/bin/lrelease Language/quazaa_sv.ts -qm ./bin/quazaa_sv.qm
+ 
+ bin/quazaa_tr.qm: Language/quazaa_tr.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_tr.ts -qm ./bin/quazaa_tr.qm
++	/usr/bin/lrelease Language/quazaa_tr.ts -qm ./bin/quazaa_tr.qm
+ 
+ bin/quazaa_tw.qm: Language/quazaa_tw.ts
+-	/usr/lib64/qt5/bin/lrelease Language/quazaa_tw.ts -qm ./bin/quazaa_tw.qm
++	/usr/bin/lrelease Language/quazaa_tw.ts -qm ./bin/quazaa_tw.qm
+ 
+ compiler_rcc_make_all: temp/qrc/release/qrc_Resource.cpp
+ compiler_rcc_clean:
