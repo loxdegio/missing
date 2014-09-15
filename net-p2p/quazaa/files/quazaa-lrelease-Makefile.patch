@@ -1,4 +1,3 @@
-diff -rupN Makefile Makefile
 --- Makefile	2014-09-13 19:00:12.642924663 +0200
 +++ Makefile	2014-09-14 15:54:48.399534345 +0200
 @@ -1243,97 +1243,97 @@ compiler_updateqm_make_all: bin/quazaa_a

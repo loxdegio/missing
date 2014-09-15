@@ -1,7 +1,6 @@
-diff -rupN Quazaa.pro Quazaa.pro
---- Quazaa.pro	2014-09-13 19:00:08.626903605 +0200
-+++ Quazaa.pro	2014-09-14 15:55:09.267632274 +0200
-@@ -104,7 +104,7 @@ QMAKE_CLEAN += $$VERSION_HEADER_PATH
+--- Quazaa/Quazaa.pro	2014-09-15 09:01:58.631154467 +0200
++++ Quazaa/Quazaa.pro	2014-09-15 09:08:21.359071029 +0200
+@@ -100,7 +100,7 @@ QMAKE_CLEAN += $$VERSION_HEADER_PATH
  # Language stuff
  isEmpty(QMAKE_LRELEASE) {
  		win32:QMAKE_LRELEASE = $$[QT_INSTALL_BINS]\\lrelease.exe
