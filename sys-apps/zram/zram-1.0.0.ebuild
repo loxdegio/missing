@@ -30,20 +30,20 @@ pkg_setup() {
 src_install() {
 	dodir /usr/lib/systemd/system
 	insinto /usr/lib/systemd/system
-	doins zram.service
+	doins zram.service || die "Service not installed"
 	
 	dodir /usr/sbin
 	into /usr
-	dosbin zramstart
-	dosbin zramstop
+	dosbin zramstart || die "sbin not installed"
+	dosbin zramstop || die "sbin not installed"
 	
 	dodir /usr/bin
 	exeinto /usr/bin
-	doexe zramstat
+	doexe zramstat || die "bin not installed"
 	
 	dodir /etc/sysconfig			
 	insinto /etc/sysconfig
-	doins zram
+	doins zram || die "config not installed"
 }
 
 pkg_postrm() {
