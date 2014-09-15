@@ -38,11 +38,8 @@ RDEPEND="${CDEPEND}
 
 DOCS=(AUTHORS Changelog README TODO)
 
-src_prepare() {
-	epatch "${FILESDIR}/${PN}-lrelease.patch"
-}
-
-src_configure() {	
+src_configure() {
+	epatch "${FILESDIR}/${PN}-lrelease.patch"	
 	eqmake5
 	
 	#epatch "${FILESDIR}/${PN}-lrelease-Makefle.patch"

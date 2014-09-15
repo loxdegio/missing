@@ -1,6 +1,6 @@
-diff -rupN quazaa-9999/Quazaa.pro quazaa-9999/Quazaa.pro
---- quazaa-9999/Quazaa.pro	2014-09-13 19:00:08.626903605 +0200
-+++ quazaa-9999/Quazaa.pro	2014-09-14 15:55:09.267632274 +0200
+diff -rupN Quazaa.pro Quazaa.pro
+--- Quazaa.pro	2014-09-13 19:00:08.626903605 +0200
++++ Quazaa.pro	2014-09-14 15:55:09.267632274 +0200
 @@ -104,7 +104,7 @@ QMAKE_CLEAN += $$VERSION_HEADER_PATH
  # Language stuff
  isEmpty(QMAKE_LRELEASE) {

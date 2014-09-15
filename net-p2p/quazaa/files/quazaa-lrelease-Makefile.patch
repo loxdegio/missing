@@ -1,6 +1,6 @@
-diff -rupN quazaa-9999/Makefile quazaa-9999/Makefile
---- quazaa-9999/Makefile	2014-09-13 19:00:12.642924663 +0200
-+++ quazaa-9999/Makefile	2014-09-14 15:54:48.399534345 +0200
+diff -rupN Makefile Makefile
+--- Makefile	2014-09-13 19:00:12.642924663 +0200
++++ Makefile	2014-09-14 15:54:48.399534345 +0200
 @@ -1243,97 +1243,97 @@ compiler_updateqm_make_all: bin/quazaa_a
  compiler_updateqm_clean:
  	-$(DEL_FILE) bin/quazaa_af.qm bin/quazaa_ar.qm bin/quazaa_ca.qm bin/quazaa_chs.qm bin/quazaa_cz.qm bin/quazaa_de.qm bin/quazaa_default_en.qm bin/quazaa_ee.qm bin/quazaa_es.qm bin/quazaa_fa.qm bin/quazaa_fi.qm bin/quazaa_fr.qm bin/quazaa_gr.qm bin/quazaa_heb.qm bin/quazaa_hr.qm bin/quazaa_hu.qm bin/quazaa_it.qm bin/quazaa_ja.qm bin/quazaa_lt.qm bin/quazaa_nl.qm bin/quazaa_no.qm bin/quazaa_pl.qm bin/quazaa_pt-br.qm bin/quazaa_pt.qm bin/quazaa_ru.qm bin/quazaa_sl-si.qm bin/quazaa_sq.qm bin/quazaa_sr.qm bin/quazaa_sv.qm bin/quazaa_tr.qm bin/quazaa_tw.qm
