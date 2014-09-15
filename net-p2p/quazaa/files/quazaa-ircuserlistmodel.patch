@@ -1,0 +1,11 @@
+--- Quazaa/Models/ircuserlistmodel.cpp	2014-09-15 12:30:50.120907593 +0200
++++ Quazaa/Models/ircuserlistmodel.cpp	2014-09-15 12:41:12.223022853 +0200
+@@ -23,7 +23,7 @@
+ */
+ 
+ #include "ircuserlistmodel.h"
+-#include "ircusermodel_p.h"
++#include <ircusermodel_p.h>
+ #include "quazaasettings.h"
+ 
+ IrcUserListModel::IrcUserListModel(QObject *parent) :

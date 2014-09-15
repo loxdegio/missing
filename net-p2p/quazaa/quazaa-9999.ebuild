@@ -39,7 +39,8 @@ RDEPEND="${CDEPEND}
 DOCS=(AUTHORS Changelog README TODO)
 
 src_configure() {
-	epatch "${FILESDIR}/${PN}-lrelease.patch"	
+	epatch "${FILESDIR}/${PN}-lrelease.patch"
+	epatch "${FILESDIR}/${PN}-ircuserlistmodel.patch"	
 	eqmake5
 }
 
