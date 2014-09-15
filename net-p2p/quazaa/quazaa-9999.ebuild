@@ -49,7 +49,15 @@ src_test() {
 }
 
 src_install() {
-	default
+	if [ -f Makefile ] || [ -f GNUmakefile ] || [ -f makefile ]; then
+		emake DESTDIR="${D}" install || die "emake install failed"
+    fi
+    if [ -n "${DOCS}" ]; then
+		dodoc ${DOCS} || die "dodoc failed"
+    else
+		# No die here because we don't know if any of these exist
+        dodoc AUTHORS ChangeLog NEWS README
+    fi
 
 	# Punt useless libtool's .la files
 	find "${D}" -name '*.la' -delete
