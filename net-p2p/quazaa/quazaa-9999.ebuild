@@ -52,6 +52,8 @@ src_install() {
 	if [ -f Makefile ] || [ -f GNUmakefile ] || [ -f makefile ]; then
 		emake DESTDIR="${D}" install || die "emake install failed"
     fi
+    
+    emake install || die "emake install failed"
 
 	# Punt useless libtool's .la files
 	find "${D}" -name '*.la' -delete
