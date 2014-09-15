@@ -1,0 +1,10 @@
+--- include/IrcCore/ircmessage.h	2014-09-15 12:17:50.684004457 +0200
++++ include/IrcCore/ircmessage.h	2014-09-15 12:17:27.223886992 +0200
+@@ -473,6 +473,7 @@ class IRC_CORE_EXPORT IrcWhoReplyMessage
+ public:
+     Q_INVOKABLE explicit IrcWhoReplyMessage(IrcConnection* connection);
+ 
++	QString channel() const;
+     QString mask() const;
+     QString server() const;
+     bool isAway() const;

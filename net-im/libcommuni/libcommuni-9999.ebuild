@@ -23,6 +23,8 @@ DEPEND="${RDEPEND}
 	test? ( dev-qt/qttest:5 )"
 
 src_prepare() {
+	epatch "${FILESDIR}/${PN}-ircmessage.patch"
+	
 	UCHD="${S}"/src/3rdparty/uchardet-0.0.1/uchardet.pri
 	echo "CONFIG *= link_pkgconfig" > "$UCHD"
 	echo "PKGCONFIG += uchardet" >> "$UCHD"
