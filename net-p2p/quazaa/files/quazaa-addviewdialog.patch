@@ -1,0 +1,15 @@
+--- Quazaa/3rdparty/communi-desktop/src/addviewdialog.cpp	2014-09-15 10:56:39.294610318 +0200
++++ Quazaa/3rdparty/communi-desktop/src/addviewdialog.cpp	2014-09-15 11:16:41.246629259 +0200
+@@ -15,10 +15,10 @@
+ #include "addviewdialog.h"
+ #include <QDialogButtonBox>
+ #include <QRegExpValidator>
+-#include <IrcConnection>
++#include <ircconnection.h>
+ #include <QPushButton>
+ #include <QVBoxLayout>
+-#include <IrcNetwork>
++#include <ircnetwork.h>
+ #include <QLineEdit>
+ #include <QRegExp>
+ #include <QLabel>

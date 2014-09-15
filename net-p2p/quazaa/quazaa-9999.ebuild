@@ -42,7 +42,8 @@ src_configure() {
 	epatch "${FILESDIR}/${PN}-lrelease.patch"	
 	eqmake5
 	
-	#epatch "${FILESDIR}/${PN}-lrelease-Makefle.patch"
+	epatch "${FILESDIR}/${PN}-irccommandparser.patch"
+	epatch "${FILESDIR}/${PN}-addviewdialog.patch"
 }
 
 src_test() {

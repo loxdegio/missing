@@ -1,0 +1,11 @@
+--- Quazaa/3rdparty/communi-desktop/src/shared/commandparser.h	2014-09-15 10:56:39.309610393 +0200
++++ Quazaa/3rdparty/communi-desktop/src/shared/commandparser.h	2014-09-15 11:09:06.602352924 +0200
+@@ -28,7 +28,7 @@
+ #ifndef COMMANDPARSER_H
+ #define COMMANDPARSER_H
+ 
+-#include <IrcCommandParser>
++#include <irccommandparser.h>
+ #include <QString>
+ #include <QMap>
+ 
