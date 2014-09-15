@@ -8,7 +8,7 @@ inherit qt5
 
 DESCRIPTION="A cross-platform IRC framework written with Qt"
 HOMEPAGE="http://communi.github.io/"
-SRC_URI="https://github.com/communi/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+EGIT_REPO_URI="git://github.com/communi/${PN}"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
