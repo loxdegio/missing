@@ -8,3 +8,24 @@
      QString mask() const;
      QString server() const;
      bool isAway() const;
+--- src/core/ircmessage.cpp	2014-09-15 12:26:56.319736802 +0200
++++ src/core/ircmessage.cpp	2014-09-15 12:26:36.738638747 +0200
+@@ -1473,6 +1473,18 @@ IrcWhoReplyMessage::IrcWhoReplyMessage(I
+ }
+ 
+ /*!
++    This property holds the channel in question.
++
++    \par Access function:
++    \li QString <b>channel</b>() const
++ */
++QString IrcWhoReplyMessage::channel() const
++{
++    Q_D(const IrcMessage);
++    return d->param(1);
++}
++
++/*!
+     This property holds the mask.
+ 
+     \par Access function:
