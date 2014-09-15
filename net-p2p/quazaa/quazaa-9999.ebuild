@@ -41,9 +41,6 @@ DOCS=(AUTHORS Changelog README TODO)
 src_configure() {
 	epatch "${FILESDIR}/${PN}-lrelease.patch"	
 	eqmake5
-	
-	epatch "${FILESDIR}/${PN}-irccommandparser.patch"
-	epatch "${FILESDIR}/${PN}-addviewdialog.patch"
 }
 
 src_test() {
