@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit qt5
+inherit qt5 git-2
 
 DESCRIPTION="A cross-platform IRC framework written with Qt"
 HOMEPAGE="http://communi.github.io/"
