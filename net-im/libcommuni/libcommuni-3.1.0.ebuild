@@ -4,9 +4,9 @@
 
 EAPI=5
 
-inherit qt4-r2
+inherit qt5
 
-DESCRIPTION="A cross-platform IRC framework written with Qt 4"
+DESCRIPTION="A cross-platform IRC framework written with Qt"
 HOMEPAGE="http://communi.github.io/"
 SRC_URI="https://github.com/communi/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
@@ -15,22 +15,22 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="icu test"
 
-RDEPEND="dev-qt/qtcore
+RDEPEND="dev-qt/qtcore:5
 	icu? ( dev-libs/icu )
 	!icu? ( dev-libs/uchardet )"
 
 DEPEND="${RDEPEND}
-	test? ( dev-qt/qttest )"
+	test? ( dev-qt/qttest:5 )"
 
 src_prepare() {
 	UCHD="${S}"/src/3rdparty/uchardet-0.0.1/uchardet.pri
 	echo "CONFIG *= link_pkgconfig" > "$UCHD"
 	echo "PKGCONFIG += uchardet" >> "$UCHD"
-	qt4-r2_src_prepare
+	qt5_src_prepare
 }
 
 src_configure() {
-	eqmake4 libcommuni.pro -config no_examples -config no_rpath \
+	eqmake5 libcommuni.pro -config no_examples -config no_rpath \
 		$(use icu && echo "-config icu" || echo "-config no_icu") \
 		$(use test || echo "-config no_tests")
 }
