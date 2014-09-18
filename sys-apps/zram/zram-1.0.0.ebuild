@@ -27,10 +27,6 @@ pkg_setup() {
 	fi
 }
 
-src_install() {
-	emake DESTDIR=${D} install || die "Installation failed"
-}
-
 pkg_postrm() {
 	if [ -f /usr/lib/systemd/system/zram.service ]; then
 		rm /usr/lib/systemd/system/zram.service;
