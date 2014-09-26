@@ -27,25 +27,6 @@ pkg_setup() {
 	fi
 }
 
-src_install() {
-	dodir /usr/lib/systemd/system
-	insinto /usr/lib/systemd/system
-	doins zram.service
-	
-	dodir /usr/sbin
-	into /usr
-	dosbin zramstart
-	dosbin zramstop
-	
-	dodir /usr/bin
-	exeinto /usr/bin
-	doexe zramstat
-	
-	dodir /etc/sysconfig			
-	insinto /etc/sysconfig
-	doins zram
-}
-
 pkg_postrm() {
 	if [ -f /usr/lib/systemd/system/zram.service ]; then
 		rm /usr/lib/systemd/system/zram.service;
