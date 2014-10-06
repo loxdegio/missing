@@ -66,18 +66,6 @@ src_install() {
 	fi
 }
 
-pkg_postinst(){
-	if [ -d /lib/modules/`uname -r`/kernel/drivers/input/tablet ]; then
-		insinto /lib/modules/`uname -r`/kernel/drivers/input/tablet
-		doins ${S}/lib/modules/`uname -r`/kernel/drivers/input/tablet/wacom.ko
-	fi
-	
-	if [ -d /lib/modules/`uname -r`/kernel/drivers/input/touchscreen ]; then
-		insinto /lib/modules/`uname -r`/kernel/drivers/input/touchscreen
-		doins ${S}/lib/modules/`uname -r`/kernel/drivers/input/touchscreen/wacom_w8001.ko
-	fi
-}
-
 pkg_postrm() {
 	if [ -f /lib/modules/`uname -r`/kernel/drivers/input/tablet/wacom.ko ]; then
 		rm /lib/modules/`uname -r`/kernel/drivers/input/tablet/wacom.ko;
