@@ -45,12 +45,24 @@ DEPEND="tools? ( x11-libs/libX11
 
 src_install() {
 	if [ -d /lib/modules/`uname -r`/kernel/drivers/input/tablet ]; then
-		insinto /lib/modules/`uname -r`/kernel/drivers/input/tablet;
-		doins ${S}/3.7/wacom.ko;
+		mkdir ${S}/lib
+		mkdir ${S}/lib/modules
+		mkdir ${S}/lib/modules/`uname -r`
+		mkdir ${S}/lib/modules/`uname -r`/kernel
+		mkdir ${S}/lib/modules/`uname -r`/kernel/drivers
+		mkdir ${S}/lib/modules/`uname -r`/kernel/drivers/input
+		mkdir ${S}/lib/modules/`uname -r`/kernel/drivers/input/tablet
+		cp ${S}/3.7/wacom.ko mkdir ${S}/lib/modules/`uname -r`/kernel/drivers/input/tablet;
 	fi
 	if [ -d /lib/modules/`uname -r`/kernel/drivers/input/touchscreen ]; then
-		insinto /lib/modules/`uname -r`/kernel/drivers/input/touchscreen;
-		doins ${S}/3.7/wacom_w8001.ko;
+		mkdir ${S}/lib
+		mkdir ${S}/lib/modules
+		mkdir ${S}/lib/modules/`uname -r`
+		mkdir ${S}/lib/modules/`uname -r`/kernel
+		mkdir ${S}/lib/modules/`uname -r`/kernel/drivers
+		mkdir ${S}/lib/modules/`uname -r`/kernel/drivers/input
+		mkdir ${S}/lib/modules/`uname -r`/kernel/drivers/input/touchscreen
+		cp ${S}/3.7/wacom_w8001.ko ${S}/lib/modules/`uname -r`/kernel/drivers/input/tablet;
 	fi
 }
 
