@@ -152,7 +152,7 @@ RDEPEND="${COMMON_DEPEND}
 "
 
 PDEPEND="
-	>=app-office/libreoffice-l10n-${PV}*
+	>=app-office/libreoffice-l10n-${PV}
 "
 
 DEPEND="dev-util/xdelta:3"
