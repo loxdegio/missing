@@ -35,12 +35,12 @@ src_install() {
 	
 	into /usr
 	insopts -m755
-	sbin zramstart
-	sbin zramstop
+	dosbin zramstart
+	dosbin zramstop
 	
 	exeinto /usr/bin
 	insopts -m755
-	newexe zramstat
+	doexe zramstat
 	
 	dodir /etc/sysconfig
 	insinto /etc/sysconfig
