@@ -15,8 +15,10 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="input_devices_wacom tools X multilib +kernel_linux"
 
-CONFIG_CHECK="~TABLET_USB_WACOM
+CONFIG_CHECK="~HID_WACOM
+			  ~TABLET_USB_WACOM
 			  ~TOUCHSCREEN_WACOM_W8001"
+ERROR_HID_WACOM="CONFIG_HID_WACOM has to be enabled to use wacom tablets"
 ERROR_TABLET_USB_WACOM="CONFIG_TABLET_USB_WACOM has to be enabled to use wacom tablets"
 ERROR_TOUCHSCREEN_WACOM_W8001="CONFIG_TOUCHSCREEN_WACOM_W8001 has to be enabled to use wacom touch tablets"
 
