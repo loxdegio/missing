@@ -49,7 +49,7 @@ pkg_setup() {
 	linux-info_pkg_setup
 }
 		
-src_prepare(){
+src_compile(){
 	./configure
 }
 
