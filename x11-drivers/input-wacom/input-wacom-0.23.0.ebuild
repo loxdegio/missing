@@ -50,7 +50,7 @@ pkg_setup() {
 }
 		
 src_compile(){
-	./configure
+	econf
 }
 
 src_install() {
