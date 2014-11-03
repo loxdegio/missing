@@ -27,6 +27,27 @@ pkg_setup() {
 	fi
 }
 
+src_install() {
+	
+	insinto /usr/lib/systemd/system
+	insopts -m644
+	doins zram.service
+	
+	into /usr
+	insopts -m755
+	newsbin zramstart
+	newsbin zramstop
+	
+	exeinto /usr/bin
+	insopts -m755
+	newexe zramstat
+	
+	dodir /etc/sysconfig
+	insinto /etc/sysconfig
+	insopts -m644
+	doins zram
+}
+
 pkg_postrm() {
 	if [ -f /usr/lib/systemd/system/zram.service ]; then
 		rm /usr/lib/systemd/system/zram.service;
