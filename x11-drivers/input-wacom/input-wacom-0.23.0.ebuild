@@ -65,12 +65,14 @@ src_install() {
 		fi
 		
 		insinto /lib/modules/$(uname -r)/kernel/drivers/input/tablet;
+		insopts -m644;
 		doins 3.7/wacom.ko;
 	fi
 				
 	if linux_config_exists \
 				&& linux_chkconfig_present TOUCHSCREEN_WACOM_W8001; then
 		insinto /lib/modules/`uname -r`/kernel/drivers/input/touchscreen;
+		insopts -m644;
 		doins 3.7/wacom_w8001.ko;
 	fi
 }
