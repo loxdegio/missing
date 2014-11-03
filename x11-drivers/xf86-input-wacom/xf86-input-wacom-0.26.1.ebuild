@@ -44,6 +44,7 @@ src_install() {
 
 pkg_pretend() {
 	linux-info_pkg_setup
+	
 	if kernel_is lt 3 17 ; then
 		if ! linux_config_exists \
 				|| ! linux_chkconfig_present TABLET_USB_WACOM \
