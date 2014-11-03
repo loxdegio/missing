@@ -35,8 +35,8 @@ src_install() {
 	
 	into /usr
 	insopts -m755
-	newsbin zramstart
-	newsbin zramstop
+	sbin zramstart
+	sbin zramstop
 	
 	exeinto /usr/bin
 	insopts -m755
