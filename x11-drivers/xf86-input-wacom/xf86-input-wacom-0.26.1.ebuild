@@ -71,4 +71,16 @@ pkg_pretend() {
 			echo
 		fi
 	fi
+	
+	if ! linux_config_exists \
+				|| ! linux_chkconfig_present TOUCHSCREEN_WACOM_W8001; then
+			echo
+			ewarn "If you use a USB Wacom tablet, you need to enable support in your kernel"
+			ewarn "  Device Drivers --->"
+			ewarn "    Input device support --->"
+			ewarn "      -*- Generic input layer (needed for keyboard, mouse, ...)"
+			ewarn "      [*]   Touchscreens  --->"
+			ewarn "        <*>   Wacom W8001 penabled serial touchscreen"
+			echo
+	fi
 }			
