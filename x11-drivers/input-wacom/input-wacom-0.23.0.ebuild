@@ -15,8 +15,10 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="input_devices_wacom tools X multilib +kernel_linux"
 
-CONFIG_CHECK="~TABLET_USB_WACOM
+CONFIG_CHECK="~HID_WACOM
+			  ~TABLET_USB_WACOM
 			  ~TOUCHSCREEN_WACOM_W8001"
+ERROR_HID_WACOM="CONFIG_HID_WACOM has to be enabled to use wacom tablets"
 ERROR_TABLET_USB_WACOM="CONFIG_TABLET_USB_WACOM has to be enabled to use wacom tablets"
 ERROR_TOUCHSCREEN_WACOM_W8001="CONFIG_TOUCHSCREEN_WACOM_W8001 has to be enabled to use wacom touch tablets"
 
@@ -42,15 +44,36 @@ DEPEND="tools? ( x11-libs/libX11
 		     )
 		)
 		kernel_linux? ( virtual/linux-sources )"
+		
+pkg_setup() {
+	linux-info_pkg_setup
+}
+		
+src_compile(){
+	econf
+}
 
 src_install() {
-	if [ -d /lib/modules/`uname -r`/kernel/drivers/input/tablet ]; then
-		insinto /lib/modules/`uname -r`/kernel/drivers/input/tablet;
-		doins ${S}/3.7/wacom.ko;
+	linux-info_pkg_setup
+	
+	if linux_config_exists \
+				&& ( linux_chkconfig_present HID_WACOM \
+				|| ( linux_chkconfig_present TABLET_USB_WACOM \
+				&& linux_chkconfig_present INPUT_EVDEV )); then
+		if kernel_is ge 3 17 ; then
+			dodir /lib/modules/$(uname -r)/kernel/drivers/input/tablet;
+		fi
+		
+		insinto /lib/modules/$(uname -r)/kernel/drivers/input/tablet;
+		insopts -m644;
+		doins 3.7/wacom.ko;
 	fi
-	if [ -d /lib/modules/`uname -r`/kernel/drivers/input/touchscreen ]; then
+				
+	if linux_config_exists \
+				&& linux_chkconfig_present TOUCHSCREEN_WACOM_W8001; then
 		insinto /lib/modules/`uname -r`/kernel/drivers/input/touchscreen;
-		doins ${S}/3.7/wacom_w8001.ko;
+		insopts -m644;
+		doins 3.7/wacom_w8001.ko;
 	fi
 }
 
@@ -61,4 +84,48 @@ pkg_postrm() {
 	if [ -f /lib/modules/`uname -r`/kernel/drivers/input/touchscreen/wacom_w8001.ko ]; then
 		rm /lib/modules/`uname -r`/kernel/drivers/input/touchscreen/wacom_w8001.ko;
 	fi
+}
+
+pkg_pretend() {
+	linux-info_pkg_setup
+	
+	if kernel_is lt 3 17 ; then
+		if ! linux_config_exists \
+				|| ! linux_chkconfig_present TABLET_USB_WACOM \
+				|| ! linux_chkconfig_present INPUT_EVDEV; then
+			echo
+			ewarn "If you use a USB Wacom tablet, you need to enable support in your kernel"
+			ewarn "  Device Drivers --->"
+			ewarn "    Input device support --->"
+			ewarn "      <*>   Event interface"
+			ewarn "      [*]   Tablets  --->"
+			ewarn "        <*>   Wacom Intuos/Graphire tablet support (USB)"
+			echo
+		fi
+	else 
+		if ! linux_config_exists \
+				|| ! linux_chkconfig_present HID_WACOM; then
+			echo
+			ewarn "If you use a USB Wacom tablet, you need to enable support in your kernel"
+			ewarn "  Device Drivers  --->"
+			ewarn "    HID support  --->"  
+			ewarn "      {*} HID bus support"  
+			ewarn "			 Special HID drivers  --->"
+			ewarn "			   <*> Wacom Intuos/Graphire tablet support (USB)"
+			echo
+		fi
+	fi
+	
+	if ! linux_config_exists \
+				|| ! linux_chkconfig_present TOUCHSCREEN_WACOM_W8001; then
+			echo
+			ewarn "If you use a USB Wacom tablet, you need to enable support in your kernel"
+			ewarn "  Device Drivers --->"
+			ewarn "    Input device support --->"
+			ewarn "      -*- Generic input layer (needed for keyboard, mouse, ...)"
+			ewarn "      [*]   Touchscreens  --->"
+			ewarn "        <*>   Wacom W8001 penabled serial touchscreen"
+			echo
+	fi
+	
 }
