@@ -9,8 +9,7 @@ inherit linux-info linux-mod eutils
 DESCRIPTION="Processor Hardware Control for Intel CPUs"
 HOMEPAGE="http://www.linux-phc.org/
 	http://www.linux-phc.org/forum/viewtopic.php?f=7&t=267"
-#no automatic filenames here, sorry
-SRC_URI="http://www.linux-phc.org/forum/download/file.php?id=162 -> phc-intel-pack-rev16.tar.bz2"
+SRC_URI="https://github.com/loxdegio/SystemdZramService/raw/master/phc/phc-intel-pack-rev17.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
