@@ -15,6 +15,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="input_devices_wacom tools X multilib +kernel_linux"
 
+KERNEL_VERSION=`uname -r`
+
 CONFIG_CHECK="~HID_WACOM
 			  ~TABLET_USB_WACOM
 			  ~TOUCHSCREEN_WACOM_W8001"
@@ -61,28 +63,28 @@ src_install() {
 				|| ( linux_chkconfig_present TABLET_USB_WACOM \
 				&& linux_chkconfig_present INPUT_EVDEV )); then
 		if kernel_is ge 3 17 ; then
-			dodir /lib/modules/$(uname -r)/kernel/drivers/input/tablet;
+			dodir /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet;
 		fi
 		
-		insinto /lib/modules/$(uname -r)/kernel/drivers/input/tablet;
+		insinto /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet;
 		insopts -m644;
 		doins 3.7/wacom.ko;
 	fi
 				
 	if linux_config_exists \
 				&& linux_chkconfig_present TOUCHSCREEN_WACOM_W8001; then
-		insinto /lib/modules/`uname -r`/kernel/drivers/input/touchscreen;
+		insinto /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen;
 		insopts -m644;
 		doins 3.7/wacom_w8001.ko;
 	fi
 }
 
 pkg_postrm() {
-	if [ -f /lib/modules/`uname -r`/kernel/drivers/input/tablet/wacom.ko ]; then
-		rm /lib/modules/`uname -r`/kernel/drivers/input/tablet/wacom.ko;
+	if [ -f /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet/wacom.ko ]; then
+		rm /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet/wacom.ko;
 	fi
-	if [ -f /lib/modules/`uname -r`/kernel/drivers/input/touchscreen/wacom_w8001.ko ]; then
-		rm /lib/modules/`uname -r`/kernel/drivers/input/touchscreen/wacom_w8001.ko;
+	if [ -f /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen/wacom_w8001.ko ]; then
+		rm /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen/wacom_w8001.ko;
 	fi
 }
 
