@@ -1,5 +1,5 @@
---- /var/tmp/portage/app-emulation/vmware-modules-279.3-r1/work/vmmon-only/linux/vmmonInt.h	2014-06-13 02:38:24.000000000 +0200
-+++ /home/lox/Scrivania/vmmonInt.h	2014-11-05 14:58:20.712535118 +0100
+--- vmmon-only/linux/vmmonInt.h	2014-06-13 02:38:24.000000000 +0200
++++ vmmon-only/linux/vmmonInt.h	2014-11-05 14:58:20.712535118 +0100
 @@ -28,11 +28,7 @@
   * Hide all kernel compatibility stuff in these macros and functions.
   */
