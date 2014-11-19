@@ -15,12 +15,9 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-# geoip and python are runtime deps only (see INSTALL file)
-CDEPEND="
+DEPEND="
 	dev-qt/qtcore:4
-"
-DEPEND="${CDEPEND}
-	virtual/pkgconfig
+	dev-qt/qtgui:4
 "
 
 S=${WORKDIR}/${MY_P}
@@ -31,5 +28,11 @@ src_configure() {
 }
 
 src_install() {
+	
+	dodir /usr/share/eggwm
+	
+	exeinto /usr/bin
+	doexe ${S}/eggwm	
+	
 	emake DESTDIR="${D}" install
 }
