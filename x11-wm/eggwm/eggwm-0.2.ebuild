@@ -29,3 +29,7 @@ DOCS=(AUTHORS Changelog README.md TODO)
 src_configure() {
 	eqmake4
 }
+
+src_install() {
+	emake DESTDIR="${D}" install
+}
