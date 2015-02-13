@@ -3,7 +3,7 @@
 
 EAPI=5
 
-inherit 
+inherit qt5-build
 
 DESCRIPTION="Qt5 search tool for pcmanfm-qt"
 HOMEPAGE="https://forum.manjaro.org/index.php?topic=16371.0"
