@@ -26,15 +26,3 @@ RDEPEND="${CDEPEND}
 DOCS=(AUTHORS Changelog README TODO)
 
 S="${WORKDIR}/${PN}_${PV}"
-
-src_configure() {	
-	eqmake
-}
-
-src_test() {
-	Xemake check-TESTS
-}
-
-src_install() {
-	emake DESTDIR="${D}" install || die "emake install failed"
-}
