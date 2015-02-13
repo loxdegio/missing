@@ -28,7 +28,7 @@ DOCS=(AUTHORS Changelog README TODO)
 S="${WORKDIR}/${PN}_${PV}"
 
 src_configure() {	
-	eqmake5
+	eqmake
 }
 
 src_test() {
