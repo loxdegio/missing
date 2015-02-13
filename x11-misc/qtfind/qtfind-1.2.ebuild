@@ -26,3 +26,7 @@ RDEPEND="${CDEPEND}
 DOCS=(AUTHORS Changelog README TODO)
 
 S="${WORKDIR}/${PN}_${PV}"
+
+src_install() {
+	emake DESTDIR="${D}" install || die "emake install failed"
+}
