@@ -58,24 +58,129 @@ src_compile(){
 src_install() {
 	linux-info_pkg_setup
 	
-	if linux_config_exists \
-				&& ( linux_chkconfig_present HID_WACOM \
-				|| ( linux_chkconfig_present TABLET_USB_WACOM \
-				&& linux_chkconfig_present INPUT_EVDEV )); then
-		if kernel_is ge 3 17 ; then
+	if (kernel_is ge 2 6 30) &&  (kernel_is lt 2 6 36); then
+		if linux_config_exists \
+				linux_chkconfig_present TABLET_USB_WACOM \
+				&& linux_chkconfig_present INPUT_EVDEV; then
+			if [ ! -d /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet ]; then
+				dodir /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet;
+			fi
+		
+			insinto /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet;
+			insopts -m644;
+			doins 2.6.30/wacom.ko;
+		fi
+		
+		if linux_config_exists \
+				&& linux_chkconfig_present TOUCHSCREEN_WACOM_W8001; then
+			if [ ! -d /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen ]; then
+				dodir /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen;
+			fi
+				
+			insinto /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen;
+			insopts -m644;
+			doins 2.6.30/wacom_w8001.ko;
+		fi
+	fi
+	
+	if (kernel_is ge 2 6 36) &&  (kernel_is lt 2 6 38); then
+		if linux_config_exists \
+				linux_chkconfig_present TABLET_USB_WACOM \
+				&& linux_chkconfig_present INPUT_EVDEV; then
+		if [ ! -d /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet ]; then
 			dodir /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet;
 		fi
 		
-		insinto /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet;
-		insopts -m644;
-		doins 3.7/wacom.ko;
-	fi
-				
-	if linux_config_exists \
+			insinto /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet;
+			insopts -m644;
+			doins 2.6.36/wacom.ko;
+		fi
+		
+		if linux_config_exists \
 				&& linux_chkconfig_present TOUCHSCREEN_WACOM_W8001; then
-		insinto /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen;
-		insopts -m644;
-		doins 3.7/wacom_w8001.ko;
+			if [ ! -d /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen ]; then
+				dodir /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen;
+			fi
+				
+			insinto /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen;
+			insopts -m644;
+			doins 2.6.36/wacom_w8001.ko;
+		fi
+	fi
+	
+	if (kernel_is ge 2 6 38) &&  (kernel_is lt 3 7); then
+		if linux_config_exists \
+				linux_chkconfig_present TABLET_USB_WACOM \
+				&& linux_chkconfig_present INPUT_EVDEV; then
+		if [ ! -d /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet ]; then
+			dodir /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet;
+		fi
+		
+			insinto /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet;
+			insopts -m644;
+			doins 2.6.38/wacom.ko;
+		fi
+		
+		if linux_config_exists \
+				&& linux_chkconfig_present TOUCHSCREEN_WACOM_W8001; then
+			if [ ! -d /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen ]; then
+				dodir /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen;
+			fi
+				
+			insinto /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen;
+			insopts -m644;
+			doins 2.6.38/wacom_w8001.ko;
+		fi
+	fi
+	
+	if (kernel_is ge 3 7) &&  (kernel_is lt 3 17); then
+		if linux_config_exists \
+				linux_chkconfig_present TABLET_USB_WACOM \
+				&& linux_chkconfig_present INPUT_EVDEV; then
+			if [ ! -d /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet ]; then
+				dodir /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet;
+			fi
+		
+			insinto /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet;
+			insopts -m644;
+			doins 3.7/wacom.ko;
+		fi
+		
+		if linux_config_exists \
+				&& linux_chkconfig_present TOUCHSCREEN_WACOM_W8001; then
+			if [ ! -d /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen ]; then
+				dodir /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen;
+			fi
+				
+			insinto /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen;
+			insopts -m644;
+			doins 3.7/wacom_w8001.ko;
+		fi
+	fi
+	
+	if kernel_is ge 3 17; then
+		if linux_config_exists \
+					linux_chkconfig_present HID_WACOM \
+					&& linux_chkconfig_present INPUT_EVDEV; then
+			if [ ! -d /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet ]; then
+				dodir /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet;
+			fi
+			
+			insinto /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/tablet;
+			insopts -m644;
+			doins 3.17/wacom.ko;
+		fi
+				
+		if linux_config_exists \
+					&& linux_chkconfig_present TOUCHSCREEN_WACOM_W8001; then
+			if [ ! -d /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen ]; then
+				dodir /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen;
+			fi		
+			
+			insinto /lib/modules/${KERNEL_VERSION}/kernel/drivers/input/touchscreen;
+			insopts -m644;
+			doins 3.17/wacom_w8001.ko;
+		fi
 	fi
 }
 
