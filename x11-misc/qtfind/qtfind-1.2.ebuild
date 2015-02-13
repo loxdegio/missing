@@ -17,6 +17,7 @@ IUSE="+qt5"
 
 CDEPEND="
 	dev-qt/qtcore:5
+	dev-qt/qtgui:5
 	dev-qt/qtwidgets:5
 "
 DEPEND="${CDEPEND}
