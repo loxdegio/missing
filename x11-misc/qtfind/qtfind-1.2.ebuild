@@ -31,15 +31,15 @@ S="${WORKDIR}/${PN}_${PV}"
 
 src_install() {
 	exeinto /usr/bin
-	doexe ${PN}
+	doexe ${S}/${PN}
 	
 	insinto /usr/share/pixmaps
-	doins ${PN}.png
+	doins ${S}/${PN}.png
 	
 	insinto /usr/share/file-manager/actions
-	doins ${PN}.desktop
+	doins ${S}/${PN}.desktop
 	
 	dodir /usr/lib/${PN}_i18n
 	insinto /usr/lib/${PN}_i18n
-	doins ${PN}_i18n/*.qm
+	doins ${S}/${PN}_i18n/*.qm
 }
