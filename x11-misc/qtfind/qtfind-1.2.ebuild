@@ -30,5 +30,16 @@ DOCS=(AUTHORS Changelog README TODO)
 S="${WORKDIR}/${PN}_${PV}"
 
 src_install() {
-	emake DESTDIR="${D}" install || die "emake install failed"
+	exeinto /usr/bin
+	doexe ${PN}
+	
+	insinto /usr/share/pixmaps
+	doins ${PN}.png
+	
+	insinto /usr/share/file-manager/actions
+	doins ${PN}.desktop
+	
+	dodir /usr/lib/${PN}_i18n
+	insinto /usr/lib/${PN}_i18n
+	doins ${PN}_i18n/*.qm
 }
