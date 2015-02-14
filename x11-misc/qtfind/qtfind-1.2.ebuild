@@ -31,7 +31,7 @@ S="${WORKDIR}/${PN}_${PV}"
 
 src_install() {
 	exeinto /usr/bin
-	doexe ${S}/${PN}
+	doexe ${WORKDIR}/${PN}-opensource-src-${PV}/${PN}
 	
 	insinto /usr/share/pixmaps
 	doins ${S}/${PN}.png
