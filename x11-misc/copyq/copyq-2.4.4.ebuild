@@ -30,8 +30,5 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	local mycmakeargs=(
-		$(cmake-utils_use_use qt5)
-	)
 	cmake-utils_src_configure
 }
