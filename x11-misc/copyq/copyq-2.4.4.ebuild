@@ -6,7 +6,7 @@ inherit cmake-utils
 
 DESCRIPTION="Qt-based clipboard to make easier copy and paste through the programs with LxQt"
 HOMEPAGE="http://sourceforge.net/projects/${PN}/"
-SRC_URI="http://sourceforge.net/projects/${PN}/files/${P}/${P}.tar.gz/download"
+SRC_URI="http://sourceforge.net/projects/${PN}/files/${P}/${P}.tar.gz"
 
 LICENSE="GPL-2+"
 SLOT="0"
