@@ -22,6 +22,8 @@ DEPEND="
 	)"
 RDEPEND="${DEPEND}"
 
+S=${WORKDIR}/CopyQ-${PV}
+
 src_configure() {
 	local mycmakeargs=(
 		$(cmake-utils_use_use qt5)
