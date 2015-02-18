@@ -28,7 +28,7 @@ DOCS=(AUTHORS Changelog README TODO)
 src_install() {
 	exeinto /usr/bin
 	insopts -m755
-	doexe ${S}/${PN}
+	doexe ${WORKDIR}/${P}_build/${PN}
 	
 	insinto /usr/share/pixmaps
 	insopts -m644
