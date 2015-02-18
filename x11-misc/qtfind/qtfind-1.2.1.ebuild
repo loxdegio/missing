@@ -3,11 +3,11 @@
 
 EAPI=5
 
-inherit qt5-build
+inherit cmake-utils
 
 DESCRIPTION="Qt5 search tool for pcmanfm-qt"
 HOMEPAGE="https://forum.manjaro.org/index.php?topic=16371.0"
-SRC_URI="https://github.com/loxdegio/SystemdZramService/raw/master/extrapkg/${PN}/${PN}_${PV}.tar.gz"
+SRC_URI="https://github.com/loxdegio/SystemdZramService/raw/master/extrapkg/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -25,12 +25,10 @@ RDEPEND="${CDEPEND}
 
 DOCS=(AUTHORS Changelog README TODO)
 
-S="${WORKDIR}/${PN}_${PV}"
-
 src_install() {
 	exeinto /usr/bin
 	insopts -m755
-	doexe ${WORKDIR}/${PN}-opensource-src-${PV}/${PN}
+	doexe ${S}/${PN}
 	
 	insinto /usr/share/pixmaps
 	insopts -m644
