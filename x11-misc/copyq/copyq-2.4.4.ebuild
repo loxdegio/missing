@@ -13,6 +13,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="qt4 +qt5"
 
+REQUIRED_USE="^^ ( qt4 qt5 )"
+
 DEPEND="
 	qt5? (
 		dev-qt/qtcore:5
@@ -39,5 +41,9 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 src_configure() {
+	local mycmakeargs=(
+		$(cmake-utils_use_use qt5)
+		$(cmake-utils_use_use qt4 SYSTEM_QXT)
+	)
 	cmake-utils_src_configure
 }
