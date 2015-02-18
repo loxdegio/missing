@@ -15,7 +15,6 @@ IUSE="qt4 +qt5"
 
 DEPEND="
 	qt5? (
-		dev-qt/qt3support:5
 		dev-qt/qtcore:5
 		dev-qt/qtdbus:5
 		dev-qt/qtdeclarative:5
