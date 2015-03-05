@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit wxwidgets cmake-utils multilib games git-r3
+inherit cmake-utils git-r3 wxwidgets games
 
 
 DESCRIPTION="A PlayStation 2 emulator"
@@ -16,175 +16,76 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="-* ~x86 ~amd64"
 
-DESCRIPTION="A PlayStation 2 emulator"
-HOMEPAGE="http://www.pcsx2.net"
-
-IUSE="cg egl glew glsl joystick sdl sound video"
-REQUIRED_USE="
-    glew? ( || ( cg glsl ) )
-    joystick? ( sdl )
-    sound? ( sdl )
-    video? ( || ( egl glew ) )
-    ?? ( cg glsl )
-"
-
-LANGS="ar_SA ca_ES cs_CZ de_DE es_ES fi_FI fr_FR hr_HR hu_HU id_ID it_IT ja_JP ko_KR ms_MY nb_NO pl_PL pt_BR ru_RU sv_SE th_TH tr_TR zh_CN zh_TW"
-for lang in ${LANGS}; do
-        IUSE+=" linguas_${lang}"
-done
-
-RDEPEND="dev-libs/libaio[abi_x86_32]
-
-	|| (
-		x11-libs/wxGTK:2.8[abi_x86_32,X]
-		x11-libs/wxGTK:3.0[abi_x86_32,X]
+DEPEND="dev-cpp/sparsehash
+	media-libs/alsa-lib
+	media-libs/glew
+	media-libs/libsdl
+	media-libs/libsoundtouch
+	media-libs/portaudio
+	sys-libs/zlib
+	virtual/opengl
+	virtual/jpeg
+	x11-libs/gtk+:2
+	x11-libs/libICE
+	x11-libs/libX11
+	x11-libs/libXext
+	x11-libs/wxGTK:2.8[X]
+	x86? (
+		dev-libs/libaio
+		media-gfx/nvidia-cg-toolkit
 	)
+	amd64? (
+		app-emulation/emul-linux-x86-baselibs
+		app-emulation/emul-linux-x86-opengl
+		app-emulation/emul-linux-x86-xlibs
+		app-emulation/emul-linux-x86-gtklibs
+		app-emulation/emul-linux-x86-sdl
+		app-emulation/emul-linux-x86-soundlibs
+		app-emulation/emul-linux-x86-wxGTK
+		>=dev-libs/libaio-0.3.109-r4[multilib]
+		>=media-gfx/nvidia-cg-toolkit-3.1[multilib]
+		virtual/jpeg[abi_x86_32]
+	)"
+RDEPEND="${DEPEND}"
 
-	|| (
-		amd64? ( app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)] )
-		(
-			app-arch/bzip2[abi_x86_32(-)]
-			virtual/jpeg:62[abi_x86_32(-)]
-			>=sys-libs/zlib-1.2.4[abi_x86_32(-)]
-		)
-	)
-	|| (
-		amd64? ( app-emulation/emul-linux-x86-gtklibs[-abi_x86_32(-)] )
-		x11-libs/gtk+:2[abi_x86_32(-)]
-	)
-	|| (
-		amd64? ( app-emulation/emul-linux-x86-xlibs[-abi_x86_32(-)] )
-		(
-			x11-libs/libICE[abi_x86_32(-)]
-			x11-libs/libX11[abi_x86_32(-)]
-			x11-libs/libXext[abi_x86_32(-)]
-		)
-	)
-
-	video? (
-		|| (
-			amd64? ( app-emulation/emul-linux-x86-opengl[-abi_x86_32(-)] )
-			(
-				virtual/opengl[abi_x86_32(-)]
-				egl? ( media-libs/mesa[abi_x86_32(-),egl] )
-				glew? ( media-libs/glew[abi_x86_32(-)] )
-			)
-		)
-		cg? ( media-gfx/nvidia-cg-toolkit[abi_x86_32] )
-	)
-
-	sdl? (
-		|| (
-			amd64? ( app-emulation/emul-linux-x86-sdl[-abi_x86_32(-)] )
-			media-libs/libsdl[abi_x86_32(-),joystick?,sound?]
-		)
-	)
-
-	sound? (
-		|| (
-			amd64? ( app-emulation/emul-linux-x86-soundlibs[-abi_x86_32(-)] )
-			(
-				media-libs/alsa-lib[abi_x86_32(-)]
-				media-libs/portaudio[abi_x86_32(-)]
-			)
-		)
-		media-libs/libsoundtouch[abi_x86_32]
-	)
-"
-DEPEND="${RDEPEND}
-	>=dev-cpp/sparsehash-1.5
-"
-
-PATCHES=(
-	# Workaround broken glext.h, bug #510730
-	"${FILESDIR}"/mesa-10.patch
-)
-
-# Upstream issue: https://github.com/PCSX2/pcsx2/issues/417
-QA_TEXTRELS="usr/games/lib32/pcsx2/*"
+src_unpack() {
+		git-r3_src_unpack
+		cd "${S}"
+}
 
 src_prepare() {
+	# Append 32bit opengl include dir
+	if use amd64 ; then
+		sed '/include_directories/a /usr/lib32/opengl/xorg-x11/include' -i CMakeLists.txt
+	fi
 	cmake-utils_src_prepare
-
-	if ! use egl; then
-		sed -i -e "s:GSdx TRUE:GSdx FALSE:g" cmake/SelectPcsx2Plugins.cmake || die
-	fi
-	if ! use glew || ! use cg; then
-		sed -i -e "s:zerogs TRUE:zerogs FALSE:g" cmake/SelectPcsx2Plugins.cmake || die
-	fi
-	if ! use glew; then
-		sed -i -e "s:zzogl TRUE:zzogl FALSE:g" cmake/SelectPcsx2Plugins.cmake || die
-	fi
-	if ! use joystick; then
-		sed -i -e "s:onepad TRUE:onepad FALSE:g" cmake/SelectPcsx2Plugins.cmake || die
-	fi
-	if ! use sound; then
-		sed -i -e "s:spu2-x TRUE:spu2-x FALSE:g" cmake/SelectPcsx2Plugins.cmake || die
-	fi
-
-	# Remove default CFLAGS
-	sed -i -e "s:-msse -msse2 -march=i686::g" cmake/BuildParameters.cmake || die
-
-	einfo "Cleaning up locales..."
-	for lang in ${LANGS}; do
-		use "linguas_${lang}" && {
-			einfo "- keeping ${lang}"
-			continue
-		}
-		rm -Rf "${S}"/locales/"${lang}" || die
-	done
-
-	epatch_user
 }
 
 src_configure() {
-	multilib_toolchain_setup x86
+	use amd64 && local ABI="x86"
 
-	# pcsx2 build scripts will force CMAKE_BUILD_TYPE=Devel
-	# if it something other than "Devel|Debug|Release"
-	local CMAKE_BUILD_TYPE="Release"
+	local wxgtk_config=""
+	local cg_config=""
+	local mylibpath=""
 
-
-	if use amd64; then
-		# Passing correct CMAKE_TOOLCHAIN_FILE for amd64
-		# https://github.com/PCSX2/pcsx2/pull/422
-		local MYCMAKEARGS=(-DCMAKE_TOOLCHAIN_FILE=cmake/linux-compiler-i386-multilib.cmake)
-	fi
-
-	local mycmakeargs=(
-		-DDISABLE_ADVANCE_SIMD=TRUE
-		-DEXTRA_PLUGINS=TRUE
-		-DPACKAGE_MODE=TRUE
-		-DXDG_STD=TRUE
-
-		-DBIN_DIR=${GAMES_BINDIR}
-		-DCMAKE_INSTALL_PREFIX=/usr
-		-DCMAKE_LIBRARY_PATH=$(games_get_libdir)/${PN}
-		-DDOC_DIR=/usr/share/doc/${PF}
-		-DGAMEINDEX_DIR=${GAMES_DATADIR}/${PN}
-		-DGLSL_SHADER_DIR=${GAMES_DATADIR}/${PN}
-		-DGTK3_API=FALSE
-		-DPLUGIN_DIR=$(games_get_libdir)/${PN}
-		# wxGTK must be built against same sdl version
-		-DSDL2_API=FALSE
-
-		$(cmake-utils_use egl EGL_API)
-		$(cmake-utils_use glsl GLSL_API)
-	)
-
-	local WX_GTK_VER="2.8"
-	# Prefer wxGTK:3
-	if has_version 'x11-libs/wxGTK:3.0[abi_x86_32,X]'; then
-		WX_GTK_VER="3.0"
-	fi
-
-	if [ $WX_GTK_VER == '3.0' ]; then
-		mycmakeargs+=(-DWX28_API=FALSE)
+	if use amd64 ; then
+		mylibpath="/usr/$(get_libdir)"
+		wxgtk_config="-DwxWidgets_CONFIG_EXECUTABLE=/usr/bin/wx-config-2.8-32"
+		cg_config="-DCG_LIBRARY=/opt/nvidia-cg-toolkit/lib32/libCg.so
+			-DCG_GL_LIBRARY=/opt/nvidia-cg-toolkit/lib32/libCgGL.so"
 	else
-		mycmakeargs+=(-DWX28_API=TRUE)
+		mylibpath="/usr/$(get_libdir)"
 	fi
 
-	need-wxwidgets unicode
+	mycmakeargs="-DPACKAGE_MODE=1
+		-DCMAKE_VERBOSE_MAKEFILE=TRUE
+		-DCMAKE_INSTALL_PREFIX=/usr
+		-DCMAKE_LIBRARY_PATH=${mylibpath}
+		-DBUILD_REPLAY_LOADERS=FALSE
+		-DCMAKE_BUILD_TYPE=Release
+		${wxgtk_config}
+		${cg_config}"
+
 	cmake-utils_src_configure
 }
 
@@ -193,6 +94,10 @@ src_compile() {
 }
 
 src_install() {
-	cmake-utils_src_install DESTDIR="${D}"
+	cmake-utils_src_install
+
+	dogamesbin "${D}usr/bin/${PN}"
+	rm "${D}usr/bin/${PN}" || die "rm failed"
+
 	prepgamesdirs
 }
