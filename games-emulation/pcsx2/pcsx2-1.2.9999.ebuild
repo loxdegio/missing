@@ -44,7 +44,6 @@ DEPEND="dev-cpp/sparsehash
 		app-emulation/emul-linux-x86-wxGTK
 		>=dev-libs/libaio-0.3.109-r4[multilib]
 		>=media-gfx/nvidia-cg-toolkit-3.1[multilib]
-		virtual/jpeg[abi_x86_32]
 	)"
 RDEPEND="${DEPEND}"
 
