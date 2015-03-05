@@ -48,6 +48,14 @@ DEPEND="dev-cpp/sparsehash
 	)"
 RDEPEND="${DEPEND}"
 
+PATCHES=(
+	# Workaround broken glext.h, bug #510730
+	"${FILESDIR}"/mesa-10.patch
+)
+
+# Upstream issue: https://github.com/PCSX2/pcsx2/issues/417
+QA_TEXTRELS="usr/games/lib32/pcsx2/*"
+
 src_unpack() {
 		git-r3_src_unpack
 		cd "${S}"
@@ -58,33 +66,88 @@ src_prepare() {
 	if use amd64 ; then
 		sed '/include_directories/a /usr/lib32/opengl/xorg-x11/include' -i CMakeLists.txt
 	fi
+	
 	cmake-utils_src_prepare
+	
+	if ! use egl; then
+		sed -i -e "s:GSdx TRUE:GSdx FALSE:g" cmake/SelectPcsx2Plugins.cmake || die
+	fi
+	if ! use glew || ! use cg; then
+		sed -i -e "s:zerogs TRUE:zerogs FALSE:g" cmake/SelectPcsx2Plugins.cmake || die
+	fi
+	if ! use glew; then
+		sed -i -e "s:zzogl TRUE:zzogl FALSE:g" cmake/SelectPcsx2Plugins.cmake || die
+	fi
+	if ! use joystick; then
+		sed -i -e "s:onepad TRUE:onepad FALSE:g" cmake/SelectPcsx2Plugins.cmake || die
+	fi
+	if ! use sound; then
+		sed -i -e "s:spu2-x TRUE:spu2-x FALSE:g" cmake/SelectPcsx2Plugins.cmake || die
+	fi
+
+	# Remove default CFLAGS
+	sed -i -e "s:-msse -msse2 -march=i686::g" cmake/BuildParameters.cmake || die
+
+	einfo "Cleaning up locales..."
+	for lang in ${LANGS}; do
+		use "linguas_${lang}" && {
+			einfo "- keeping ${lang}"
+			continue
+		}
+		rm -Rf "${S}"/locales/"${lang}" || die
+	done
+
+	epatch_user
 }
 
 src_configure() {
-	use amd64 && local ABI="x86"
+	multilib_toolchain_setup x86
 
-	local wxgtk_config=""
-	local cg_config=""
-	local mylibpath=""
+	# pcsx2 build scripts will force CMAKE_BUILD_TYPE=Devel
+	# if it something other than "Devel|Debug|Release"
+	local CMAKE_BUILD_TYPE="Release"
 
-	if use amd64 ; then
-		mylibpath="/usr/$(get_libdir)"
-		wxgtk_config="-DwxWidgets_CONFIG_EXECUTABLE=/usr/bin/wx-config-2.8-32"
-		cg_config="-DCG_LIBRARY=/opt/nvidia-cg-toolkit/lib32/libCg.so
-			-DCG_GL_LIBRARY=/opt/nvidia-cg-toolkit/lib32/libCgGL.so"
-	else
-		mylibpath="/usr/$(get_libdir)"
+
+	if use amd64; then
+		# Passing correct CMAKE_TOOLCHAIN_FILE for amd64
+		# https://github.com/PCSX2/pcsx2/pull/422
+		local MYCMAKEARGS=(-DCMAKE_TOOLCHAIN_FILE=cmake/linux-compiler-i386-multilib.cmake)
 	fi
 
-	mycmakeargs="-DPACKAGE_MODE=1
-		-DCMAKE_VERBOSE_MAKEFILE=TRUE
+	local mycmakeargs=(
+		-DDISABLE_ADVANCE_SIMD=TRUE
+		-DEXTRA_PLUGINS=TRUE
+		-DPACKAGE_MODE=TRUE
+		-DXDG_STD=TRUE
+
+		-DBIN_DIR=${GAMES_BINDIR}
 		-DCMAKE_INSTALL_PREFIX=/usr
-		-DCMAKE_LIBRARY_PATH=${mylibpath}
-		-DBUILD_REPLAY_LOADERS=FALSE
-		-DCMAKE_BUILD_TYPE=Release
-		${wxgtk_config}
-		${cg_config}"
+		-DCMAKE_LIBRARY_PATH=$(games_get_libdir)/${PN}
+		-DDOC_DIR=/usr/share/doc/${PF}
+		-DGAMEINDEX_DIR=${GAMES_DATADIR}/${PN}
+		-DGLSL_SHADER_DIR=${GAMES_DATADIR}/${PN}
+		-DGTK3_API=FALSE
+		-DPLUGIN_DIR=$(games_get_libdir)/${PN}
+		# wxGTK must be built against same sdl version
+		-DSDL2_API=FALSE
+
+		$(cmake-utils_use egl EGL_API)
+		$(cmake-utils_use glsl GLSL_API)
+	)
+
+	local WX_GTK_VER="2.8"
+	# Prefer wxGTK:3
+	if has_version 'x11-libs/wxGTK:3.0[X]'; then
+		WX_GTK_VER="3.0"
+	fi
+
+	if [ $WX_GTK_VER == '3.0' ]; then
+		mycmakeargs+=(-DWX28_API=FALSE)
+	else
+		mycmakeargs+=(-DWX28_API=TRUE)
+	fi
+
+	need-wxwidgets unicode
 
 	cmake-utils_src_configure
 }
@@ -94,10 +157,6 @@ src_compile() {
 }
 
 src_install() {
-	cmake-utils_src_install
-
-	dogamesbin "${D}usr/bin/${PN}"
-	rm "${D}usr/bin/${PN}" || die "rm failed"
-
+	cmake-utils_src_install DESTDIR="${D}"
 	prepgamesdirs
 }
