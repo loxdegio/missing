@@ -42,7 +42,7 @@ DEPEND="dev-cpp/sparsehash
 		app-emulation/emul-linux-x86-sdl
 		app-emulation/emul-linux-x86-soundlibs
 		app-emulation/emul-linux-x86-libsoundtouch
-		app-emulation/emul-linux-x86-wxGTK:2.8
+		app-emulation/emul-linux-x86-wxGTK
 		>=dev-libs/libaio-0.3.109-r4[multilib]
 		>=media-gfx/nvidia-cg-toolkit-3.1[multilib]
 	)"
