@@ -4,20 +4,16 @@
 
 EAPI=5
 
-inherit wxwidgets cmake-utils multilib games git-r3
+inherit wxwidgets cmake-utils multilib games
 
+KEYWORDS="-* ~amd64 ~x86"
+SRC_URI="https://github.com/PCSX2/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 DESCRIPTION="A PlayStation 2 emulator"
 HOMEPAGE="http://www.pcsx2.net"
-EGIT_REPO_URI="git://github.com/PCSX2/pcsx2.git"
-EGIT_BRANCH="1.2.x"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="-* ~x86 ~amd64"
-
-DESCRIPTION="A PlayStation 2 emulator"
-HOMEPAGE="http://www.pcsx2.net"
 
 IUSE="cg egl glew glsl joystick sdl sound video"
 REQUIRED_USE="
