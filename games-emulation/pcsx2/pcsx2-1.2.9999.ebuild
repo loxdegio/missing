@@ -23,15 +23,14 @@ DEPEND="dev-cpp/sparsehash
 	media-libs/libsoundtouch
 	media-libs/portaudio
 	sys-libs/zlib
-	virtual/jpeg
 	virtual/opengl
 	x11-libs/gtk+:2
 	x11-libs/libICE
 	x11-libs/libX11
 	x11-libs/libXext
 	x11-libs/wxGTK:2.8[X]
-	media-libs/libsoundtouch
 	x86? (
+		virtual/jpeg
 		dev-libs/libaio
 		media-gfx/nvidia-cg-toolkit
 	)
@@ -45,6 +44,7 @@ DEPEND="dev-cpp/sparsehash
 		app-emulation/emul-linux-x86-wxGTK
 		>=dev-libs/libaio-0.3.109-r4[multilib]
 		>=media-gfx/nvidia-cg-toolkit-3.1[multilib]
+		virtual/jpeg[abi_x86_32]
 	)"
 RDEPEND="${DEPEND}"
 
