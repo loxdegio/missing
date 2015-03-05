@@ -16,6 +16,20 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="-* ~x86 ~amd64"
 
+IUSE="cg egl glew glsl joystick sdl sound video"
+REQUIRED_USE="
+    glew? ( || ( cg glsl ) )
+    joystick? ( sdl )
+    sound? ( sdl )
+    video? ( || ( egl glew ) )
+    ?? ( cg glsl )
+"
+
+LANGS="ar_SA ca_ES cs_CZ de_DE es_ES fi_FI fr_FR hr_HR hu_HU id_ID it_IT ja_JP ko_KR ms_MY nb_NO pl_PL pt_BR ru_RU sv_SE th_TH tr_TR zh_CN zh_TW"
+for lang in ${LANGS}; do
+        IUSE+=" linguas_${lang}"
+done
+
 DEPEND="dev-cpp/sparsehash
 	media-libs/alsa-lib
 	media-libs/glew
