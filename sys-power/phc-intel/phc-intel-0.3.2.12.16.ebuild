@@ -63,6 +63,8 @@ src_prepare() {
 
 	if kernel_is lt 3 0 ; then
 		epatch inc/${KV_MAJOR}.${KV_MINOR}.${KV_PATCH}/linux-phc-0.3.2.patch
+	elif kernel_is gt 3 16 ; then
+		epatch inc/3.16/linux-phc-0.3.2.patch
 	else
 		epatch inc/${KV_MAJOR}.${KV_MINOR}/linux-phc-0.3.2.patch
 	fi
