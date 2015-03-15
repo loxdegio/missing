@@ -15,10 +15,17 @@ LICENSE="GPL-2"
 SLOT="0"
 
 RDEPEND="
-	dev-qt/qtcore:5
 	sys-auth/polkit
+	dev-qt/qtquick1
 "
-DEPEND="${RDEPEND}
+
+CDEPEND="	
+	dev-qt/qtcore:5
+"
+	
+DEPEND="
+	${CDEPEND}
+	${RDEPEND}
 "
 
 S=${WORKDIR}/${P}/cpp
