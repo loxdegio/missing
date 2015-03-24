@@ -172,7 +172,7 @@ src_configure() {
 
 	local WX_GTK_VER="2.8"
 	# Prefer wxGTK:3
-	if has_version 'x11-libs/wxGTK:3.0[abi_x86_32,X]'; then
+	if has_version 'x11-libs/wxGTK:3.0[X]'; then
 		WX_GTK_VER="3.0"
 	fi
 
