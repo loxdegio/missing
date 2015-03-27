@@ -47,10 +47,6 @@ DEPEND="tools? ( x11-libs/libX11
 		)
 		kernel_linux? ( virtual/linux-sources )"
 		
-pkg_setup() {
-	linux-info_pkg_setup
-}
-		
 src_compile(){
 	econf
 }
