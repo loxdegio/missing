@@ -161,10 +161,11 @@ src_prepare() {
 	if use kernel_linux; then
 		if kernel_is lt 2 6 9 ; then
 			eerror "You must build this against 2.6.9 or higher kernels."
+		elif kernel_is eq 4 0 ; then
+			epatch "${FILESDIR}"/nvidia-4.0.patch
 		fi
-
 		# If greater than 2.6.5 use M= instead of SUBDIR=
-#		convert_to_m "${NV_SRC}"/Makefile.kbuild
+		#convert_to_m "${NV_SRC}"/Makefile.kbuild
 	fi
 
 	if use pax_kernel; then
