@@ -33,7 +33,7 @@ COMMON="
 	app-admin/eselect-opencl
 	kernel_linux? ( >=sys-libs/glibc-2.6.1 )
 	X? (
-		>=app-admin/eselect-opengl-1.2.7
+		>=app-eselect/eselect-opengl-1.2.7
 	)
 "
 DEPEND="
