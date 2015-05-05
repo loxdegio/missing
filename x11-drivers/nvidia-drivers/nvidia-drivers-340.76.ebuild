@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/x11-drivers/nvidia-drivers/nvidia-drivers-340.32.ebuild,v 1.1 2014/08/13 15:47:38 jer Exp $
+# $Header: /var/cvsroot/gentoo-x86/x11-drivers/nvidia-drivers/nvidia-drivers-340.76.ebuild,v 1.6 2015/03/31 18:12:46 ulm Exp $
 
 EAPI=5
 
@@ -24,16 +24,16 @@ SRC_URI="
 
 LICENSE="GPL-2 NVIDIA-r2"
 SLOT="0"
-KEYWORDS="-* ~amd64 ~x86 ~amd64-fbsd ~x86-fbsd"
+KEYWORDS="-* amd64 x86 ~amd64-fbsd ~x86-fbsd"
 IUSE="acpi multilib kernel_FreeBSD kernel_linux pax_kernel +tools +X uvm"
 RESTRICT="bindist mirror strip"
 EMULTILIB_PKG="true"
 
 COMMON="
-	app-admin/eselect-opencl
+	app-eselect/eselect-opencl
 	kernel_linux? ( >=sys-libs/glibc-2.6.1 )
 	X? (
-		>=app-eselect/eselect-opengl-1.2.7
+		>=app-eselect/eselect-opengl-1.0.9
 	)
 "
 DEPEND="
@@ -46,7 +46,7 @@ RDEPEND="
 	acpi? ( sys-power/acpid )
 	tools? (
 		dev-libs/atk
-		dev-libs/glib
+		dev-libs/glib:2
 		x11-libs/gdk-pixbuf
 		>=x11-libs/gtk+-2.4:2
 		x11-libs/libX11
@@ -54,7 +54,7 @@ RDEPEND="
 		x11-libs/pango[X]
 	)
 	X? (
-		<x11-base/xorg-server-1.16.99
+		<x11-base/xorg-server-1.17.99:=
 		>=x11-libs/libvdpau-0.3-r1
 		multilib? (
 			|| (
@@ -82,11 +82,11 @@ pkg_pretend() {
 		die "Unexpected \${DEFAULT_ABI} = ${DEFAULT_ABI}"
 	fi
 
-	if use kernel_linux && kernel_is ge 3 17 ; then
+	if use kernel_linux && kernel_is ge 3 18 ; then
 		ewarn "Gentoo supports kernels which are supported by NVIDIA"
 		ewarn "which are limited to the following kernels:"
-		ewarn "<sys-kernel/gentoo-sources-3.17"
-		ewarn "<sys-kernel/vanilla-sources-3.17"
+		ewarn "<sys-kernel/gentoo-sources-3.18"
+		ewarn "<sys-kernel/vanilla-sources-3.18"
 		ewarn ""
 		ewarn "You are free to utilize epatch_user to provide whatever"
 		ewarn "support you feel is appropriate, but will not receive"
@@ -165,7 +165,7 @@ src_prepare() {
 			epatch "${FILESDIR}"/nvidia-4.0.patch
 		fi
 		# If greater than 2.6.5 use M= instead of SUBDIR=
-		#convert_to_m "${NV_SRC}"/Makefile.kbuild
+#		convert_to_m "${NV_SRC}"/Makefile.kbuild
 	fi
 
 	if use pax_kernel; then
@@ -173,6 +173,7 @@ src_prepare() {
 		ewarn "use a standard kernel should you have issues. Should you"
 		ewarn "need support with these patches, contact the PaX team."
 		epatch "${FILESDIR}"/${PN}-331.13-pax-usercopy.patch
+		epatch "${FILESDIR}"/${PN}-337.12-pax-constify.patch
 	fi
 
 	# Allow user patches so they can support RC kernels and whatever else
@@ -329,6 +330,8 @@ src_install() {
 		doman nvidia-modprobe.1.gz
 		doman nvidia-persistenced.1.gz
 		newinitd "${FILESDIR}/nvidia-smi.init" nvidia-smi
+		newconfd "${FILESDIR}/nvidia-persistenced.conf" nvidia-persistenced
+		newinitd "${FILESDIR}/nvidia-persistenced.init" nvidia-persistenced
 	fi
 
 	if use tools; then
@@ -339,8 +342,7 @@ src_install() {
 		newins nvidia-application-profiles-${PV}-rc nvidia-application-profiles-rc
 	fi
 
-	exeinto /usr/bin/
-	doexe ${NV_OBJ}/nvidia-bug-report.sh
+	dobin ${NV_OBJ}/nvidia-bug-report.sh
 
 	# Desktop entries for nvidia-settings
 	if use tools ; then
