@@ -22,9 +22,9 @@ src_install() {
 	exeinto /usr/bin
 	doexe ${S}/${PN}
 	
-	into /usr/share/applications
+	insinto /usr/share/applications
 	doins ${S}/${PN}.desktop
 	
-	into /usr/share/pixmaps
+	insinto /usr/share/pixmaps
 	doins ${S}/${PN}.png
 }
