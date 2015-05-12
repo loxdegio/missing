@@ -42,10 +42,14 @@ src_unpack() {
 }
 
 src_install() {
+	into /usr/bin
 	dobin ${PN}
 
-	doicon images/* || die "doicon failed"
-	domenu ${PN}.desktop || die "domenu failed"
+	insinto /usr/share/pixmaps
+	doins images/* || die "doins failed"
+	
+	insinto /usr/share/applications
+	doins ${PN}.desktop || die "doins failed"
 
 	dodoc CHANGES README DISCLAIMER
 	doman ${PN}.1
