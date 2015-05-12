@@ -20,7 +20,7 @@ DEPEND="dev-qt/qtnetwork
 		
 src_install() {
 	insinto /usr/bin
-	doexe ${S}/usr/bin/${P}
+	doexe ${S}/${P}
 	
 	into /usr/share/applications
 	doins ${S}/${P}.desktop
