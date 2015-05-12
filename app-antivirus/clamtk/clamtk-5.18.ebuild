@@ -42,8 +42,8 @@ src_unpack() {
 }
 
 src_install() {
-	into /usr/bin
-	dobin ${PN}
+	exeinto /usr/bin
+	doexe ${S}/${PN}
 
 	insinto /usr/share/pixmaps
 	doins ${S}/images/* || die "doins failed"
