@@ -17,3 +17,8 @@ KEYWORDS="~amd64 ~x86 -*"
 DEPEND="dev-qt/qtnetwork
 		dev-qt/qtquick1
 		dev-qt/qtsingleapplication"
+		
+src_install() {
+	insinto /
+	doins ${S}/usr ${S}/bin
+}
