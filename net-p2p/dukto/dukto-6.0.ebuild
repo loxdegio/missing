@@ -19,6 +19,12 @@ DEPEND="dev-qt/qtnetwork
 		dev-qt/qtsingleapplication"
 		
 src_install() {
-	insinto /
-	doins ${S}/usr ${S}/bin
+	insinto /usr/bin
+	doexe ${S}/usr/bin/${P}
+	
+	into /usr/share/applications
+	doins ${S}/${P}.desktop
+	
+	into /usr/share/pixmaps
+	doins ${S}/${P}.png
 }
