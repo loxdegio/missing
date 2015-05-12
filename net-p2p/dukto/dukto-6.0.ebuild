@@ -19,7 +19,7 @@ DEPEND="dev-qt/qtnetwork
 		dev-qt/qtsingleapplication"
 		
 src_install() {
-	insinto /usr/bin
+	exeinto /usr/bin
 	doexe ${S}/${PN}
 	
 	into /usr/share/applications
