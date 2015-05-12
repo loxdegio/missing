@@ -20,11 +20,11 @@ DEPEND="dev-qt/qtnetwork
 		
 src_install() {
 	insinto /usr/bin
-	doexe ${S}/${P}
+	doexe ${S}/${PN}
 	
 	into /usr/share/applications
-	doins ${S}/${P}.desktop
+	doins ${S}/${PN}.desktop
 	
 	into /usr/share/pixmaps
-	doins ${S}/${P}.png
+	doins ${S}/${PN}.png
 }
