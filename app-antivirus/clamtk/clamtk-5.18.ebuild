@@ -46,18 +46,18 @@ src_install() {
 	dobin ${PN}
 
 	insinto /usr/share/pixmaps
-	doins images/* || die "doins failed"
+	doins ${S}/images/* || die "doins failed"
 	
 	insinto /usr/share/applications
-	doins ${PN}.desktop || die "doins failed"
+	doins ${S}/${PN}.desktop || die "doins failed"
 
 	dodoc CHANGES README DISCLAIMER
-	doman ${PN}.1
+	doman ${S}/${PN}.1
 
 	# The custom Perl modules
 	perl_set_version
 	insinto "${VENDOR_LIB}/ClamTk"
-	doins lib/*.pm
+	doins ${S}/lib/*.pm
 
 	local l
 	for l in ${LANGS}; do
