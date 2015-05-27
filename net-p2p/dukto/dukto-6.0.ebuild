@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit qmake-utils
+inherit eutils gnome2-utils qt4-r2
 
 DESCRIPTION="A simple, fast and multi-platform file transfer tool for LAN users."
 HOMEPAGE="http://www.msec.it/dukto"
@@ -14,22 +14,29 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 -*"
 
-DEPEND="dev-qt/qtnetwork:5
-		dev-qt/qtquick1:5
-		dev-qt/qtsingleapplication[X,qt5]
-		dev-qt/qtdeclarative:5"
-		
-src_prepare() {
-	eqmake5
-}
+DEPEND="dev-qt/qtgui:4
+		dev-qt/qtnetwork:4
+		dev-qt/qtsingleapplication[X,qt4]
+		dev-qt/qtdeclarative:4"
 		
 src_install() {
 	exeinto /usr/bin
 	doexe ${S}/${PN}
 	
-	insinto /usr/share/applications
-	doins ${S}/${PN}.desktop
+	domenu ${PN}.desktop
 	
-	insinto /usr/share/pixmaps
-	doins ${S}/${PN}.png
+	doicon ${PN}.png
 }
+
+pkg_postinst() {
+
+	gnome2_icon_cache_update
+	
+}
+
+pkg_postrm() {
+
+	gnome2_icon_cache_update
+	
+}
+
