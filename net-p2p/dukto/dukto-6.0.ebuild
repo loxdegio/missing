@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit qt4-r2
+inherit qmake-utils
 
 DESCRIPTION="A simple, fast and multi-platform file transfer tool for LAN users."
 HOMEPAGE="http://www.msec.it/dukto"
@@ -14,9 +14,10 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 -*"
 
-DEPEND="dev-qt/qtnetwork
-		dev-qt/qtquick1
-		dev-qt/qtsingleapplication"
+DEPEND="dev-qt/qtnetwork:5
+		dev-qt/qtquick1:5
+		dev-qt/qtsingleapplication:5
+		dev-qt/qtdeclarative:5"
 		
 src_install() {
 	exeinto /usr/bin
