@@ -16,7 +16,7 @@ KEYWORDS="~amd64 ~x86 -*"
 
 DEPEND="dev-qt/qtnetwork:5
 		dev-qt/qtquick1:5
-		dev-qt/qtsingleapplication:5
+		dev-qt/qtsingleapplication[X,qt5]
 		dev-qt/qtdeclarative:5"
 		
 src_prepare() {
