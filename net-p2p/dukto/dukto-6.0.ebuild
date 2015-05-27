@@ -19,6 +19,10 @@ DEPEND="dev-qt/qtnetwork:5
 		dev-qt/qtsingleapplication:5
 		dev-qt/qtdeclarative:5"
 		
+src_prepare() {
+	eqmake5
+}
+		
 src_install() {
 	exeinto /usr/bin
 	doexe ${S}/${PN}
