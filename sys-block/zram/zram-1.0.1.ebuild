@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit linux-info eutils
+inherit linux-info eutils systemd
 
 DESCRIPTION="ZRAM service for Systemd"
 HOMEPAGE="" 
@@ -29,10 +29,6 @@ pkg_setup() {
 
 src_install() {
 	
-	insinto /usr/lib/systemd/system
-	insopts -m644
-	doins zram.service
-	
 	into /usr
 	insopts -m755
 	dosbin zramstart
@@ -42,10 +38,11 @@ src_install() {
 	insopts -m755
 	doexe zramstat
 	
-	dodir /etc/sysconfig
-	insinto /etc/sysconfig
+	insinto /etc/conf.d
 	insopts -m644
 	doins zram
+	
+	systemd_dounit zram.service
 }
 
 pkg_postrm() {
@@ -65,10 +62,7 @@ pkg_postrm() {
 		rm /usr/sbin/zramstat;
 	fi
 	
-	if [ -d /etc/sysconfig ];then
-		if [ -f /etc/sysconfig/zram ]; then
-			rm /etc/sysconfig/zram;
-		fi;
-		rmdir /etc/sysconfig;
-	fi
+	if [ -f /etc/conf.d/zram ]; then
+		rm /etc/conf.d/zram;
+	fi;
 }
