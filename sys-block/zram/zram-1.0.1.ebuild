@@ -32,19 +32,17 @@ pkg_setup() {
 src_install() {
 	
 	into /usr
-	insopts -m755
-	dosbin zramstart
-	dosbin zramstop
+	dosbin {S}/zramstart
+	dosbin {S}/zramstop
 	
 	exeinto /usr/bin
-	insopts -m755
-	doexe zramstat
+	doexe {S}/zramstat
 	
 	insinto /etc/conf.d
 	insopts -m644
-	doins zram
+	doins {S}/zram
 	
-	systemd_dounit zram.service
+	systemd_newunit {S}/zram.service
 }
 
 pkg_postrm() {
