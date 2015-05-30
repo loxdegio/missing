@@ -18,7 +18,7 @@ CDEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5
-	dev-qt/qtmultimedia:5
+	dev-qt/qtmultimedia:5[widgets]
 	dev-qt/qtnetwork:5
 	dev-qt/qtsql:5
 	dev-qt/qtwidgets:5
