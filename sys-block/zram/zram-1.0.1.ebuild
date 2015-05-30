@@ -42,7 +42,7 @@ src_install() {
 	insopts -m644
 	doins ${S}/zram
 	
-	systemd_newunit ${S}/zram.service
+	systemd_dounit ${S}/zram.service
 }
 
 pkg_postrm() {
