@@ -30,6 +30,8 @@ DEPEND="
 DOCS=(README.md)
 
 src_configure() {	
+	epatch "${FILESDIR}/${P}-QObject.patch"
+	
 	eqmake5
 }
 
