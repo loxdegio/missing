@@ -1,23 +1,25 @@
-# Copyright 2014 loxdegio
+# Copyright 2015 loxdegio
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 EAPI=5
 
-inherit linux-info eutils
+inherit linux-info eutils systemd
 
 DESCRIPTION="ZRAM service for Systemd"
-HOMEPAGE="" 
+HOMEPAGE="https://github.com/loxdegio/SystemdZramService/" 
 SRC_URI="https://github.com/loxdegio/SystemdZramService/blob/master/${P}.tar.bz2?raw=true -> ${P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="-* ~amd64 ~x86"
 
 DEPEND=""
 
 CONFIG_CHECK="ZRAM"
 ERROR_ZRAM="CONFIG_ZRAM has to be configured at least Module to enable the activation of zram device(s)."
+
+S=${WORKDIR}
 
 pkg_setup() {
 	if kernel_is lt 2 6 37 ; then
@@ -29,23 +31,18 @@ pkg_setup() {
 
 src_install() {
 	
-	insinto /usr/lib/systemd/system
-	insopts -m644
-	doins zram.service
-	
 	into /usr
-	insopts -m755
-	dosbin zramstart
-	dosbin zramstop
+	dosbin ${S}/zramstart
+	dosbin ${S}/zramstop
 	
 	exeinto /usr/bin
-	insopts -m755
-	doexe zramstat
+	doexe ${S}/zramstat
 	
-	dodir /etc/sysconfig
-	insinto /etc/sysconfig
+	insinto /etc/conf.d
 	insopts -m644
-	doins zram
+	doins ${S}/zram
+	
+	systemd_dounit ${S}/zram.service
 }
 
 pkg_postrm() {
@@ -65,10 +62,7 @@ pkg_postrm() {
 		rm /usr/sbin/zramstat;
 	fi
 	
-	if [ -d /etc/sysconfig ];then
-		if [ -f /etc/sysconfig/zram ]; then
-			rm /etc/sysconfig/zram;
-		fi;
-		rmdir /etc/sysconfig;
-	fi
+	if [ -f /etc/conf.d/zram ]; then
+		rm /etc/conf.d/zram;
+	fi;
 }
