@@ -1,13 +1,16 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
+
+EAPI=5
 
 inherit games
 
 DESCRIPTION="A 3D Fantasy MMORPG"
 HOMEPAGE="http://planeshift.it"
-SRC_URI="x86? ( http://mirror.osmmo.org/planeshift/PlaneShift-v${PV}-x86.run )
-amd64? ( http://mirror.osmmo.org/planeshift/PlaneShift-v${PV}-x64.run )"
+SRC_URI="
+	x86? ( http://mirroring.psde.de/PlaneShift-v${PV}-x64.run )
+	amd64? ( http://mirroring.psde.de/PlaneShift-v${PV}-x64.run )"
 
 LICENSE="GPL-3 PlaneShift"
 SLOT="0"
