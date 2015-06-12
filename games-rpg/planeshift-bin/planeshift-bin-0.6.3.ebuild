@@ -26,8 +26,6 @@ cp -L "${DISTDIR}/${A}" "${S}" || die "Copy ${A} to ${WORKDIR}"
 chmod +x "${S}/${A}" || die "chmod die"
 }
 
-src_prepare() {}
-
 src_install() {
 "${S}/${A}" \
 --mode unattended \
