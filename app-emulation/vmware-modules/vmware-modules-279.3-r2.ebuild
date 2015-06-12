@@ -89,7 +89,6 @@ src_prepare() {
 	kernel_is ge 3 15 0 && epatch "${FILESDIR}/${PV_MAJOR}-3.15-00-readlink.patch"
 	kernel_is ge 3 15 0 && epatch "${FILESDIR}/${PV_MAJOR}-3.15-01-vsock.patch"
 	kernel_is ge 3 17 0 && epatch "${FILESDIR}/${PV_MAJOR}-3.17-00-netdev.patch"
-	kernel_is ge 3 17 0 && epatch "${FILESDIR}/${PV_MAJOR}-3.17-01-vmmon.patch"
 
 	# Allow user patches so they can support RC kernels and whatever else
 	epatch_user
@@ -105,4 +104,5 @@ src_install() {
 		KERNEL=="vsock", GROUP="vmware", MODE=660
 	EOF
 	udev_dorules "${udevrules}"
+	use vmci || ( dodir "/etc/modprobe.d/" && echo "alias vmci vmw_vmci" > "${D}/etc/modprobe.d/vmci.conf" )
 }
