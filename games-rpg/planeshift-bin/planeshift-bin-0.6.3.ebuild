@@ -19,13 +19,17 @@ IUSE=""
 
 RESTRICT="strip"
 
+S="${WORKDIR}"
+
 src_unpack() {
-cp -L "${DISTDIR}/${A}" "${WORKDIR}" || die "Copy ${A} to ${WORKDIR}"
-chmod +x "${WORKDIR}/${A}" || die "chmod die"
+cp -L "${DISTDIR}/${A}" "${S}" || die "Copy ${A} to ${WORKDIR}"
+chmod +x "${S}/${A}" || die "chmod die"
 }
 
+src_prepare() {}
+
 src_install() {
-"${WORKDIR}"/${A} \
+"${S}/${A}" \
 --mode unattended \
 --perms yes \
 --usergroup games \
