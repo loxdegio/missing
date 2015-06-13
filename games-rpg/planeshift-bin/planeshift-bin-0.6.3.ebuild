@@ -9,7 +9,7 @@ inherit games
 DESCRIPTION="A 3D Fantasy MMORPG"
 HOMEPAGE="http://planeshift.it"
 SRC_URI="
-	x86? ( http://mirroring.psde.de/PlaneShift-v${PV}-x64.run )
+	x86? ( http://mirroring.psde.de/PlaneShift-v${PV}-x86.run )
 	amd64? ( http://mirroring.psde.de/PlaneShift-v${PV}-x64.run )"
 
 LICENSE="GPL-3 PlaneShift"
