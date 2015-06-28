@@ -49,7 +49,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${MY_P/-${PV}/}-2.2.6-fallocate.diff
 	# Bug 412371
 	epatch "${FILESDIR}"/${MY_P/-${PV}/}-${PV/-r1/}-gcc47.patch
-	epatch "${FILESDIR}"/${MY_P}.patch
+	epatch "${FILESDIR}"/${P}.patch
 }
 
 src_configure() {
