@@ -1,19 +1,6 @@
 diff -uNr po/zh_CN.po po/zh_CN.po
 --- po/zh_CN.po	2011-03-27 21:01:14.000000000 +0800
 +++ po/zh_CN.po	2011-05-15 17:15:54.000000000 +0800
-@@ -464,6 +464,12 @@
- msgid "http://kademlia.scs.cs.nyu.edu\n"
- msgstr "http://kademlia.scs.cs.nyu.edu\n"
- 
-+msgid "\nDynamic Leech Protection\n"
-+msgstr "\n动态吸血保护\n"
-+
-+msgid " Homepage: http://amule-dlp.googlecode.com \n"
-+msgstr " 主页：http://amule-dlp.googlecode.com \n"
-+
- #: src/amuleDlg.cpp:512 src/KadDlg.cpp:192 src/PartFile.cpp:924
- #: src/PartFile.cpp:932 src/PrefsUnifiedDlg.cpp:602
- #: src/PrefsUnifiedDlg.cpp:705 src/PrefsUnifiedDlg.cpp:808
 @@ -3819,6 +3825,9 @@
  msgid "Server Info"
  msgstr "服务器信息"
@@ -76,15 +63,6 @@ diff -uNr src/amuled.cpp src/amuled.cpp
 diff -uNr src/amuleDlg.cpp src/amuleDlg.cpp
 --- src/amuleDlg.cpp	2011-03-27 21:01:14.000000000 +0800
 +++ src/amuleDlg.cpp	2011-05-15 17:09:37.000000000 +0800
-@@ -314,7 +314,7 @@
- 	wxNotebook* logs_notebook = CastChild( ID_SRVLOG_NOTEBOOK, wxNotebook);
- 	wxNotebook* networks_notebook = CastChild( ID_NETNOTEBOOK, wxNotebook);
- 	
--	wxASSERT(logs_notebook->GetPageCount() == 4);
-+	wxASSERT(logs_notebook->GetPageCount() == 5);
- 	wxASSERT(networks_notebook->GetPageCount() == 2);
- 	
- 	for (uint32 i = 0; i < logs_notebook->GetPageCount(); ++i) {
 @@ -506,7 +506,13 @@
  		_("Part of aMule is based on \n") <<
  		_("Kademlia: Peer-to-peer routing based on the XOR metric.\n") <<
@@ -119,15 +97,6 @@ diff -uNr src/amuleDlg.cpp src/amuleDlg.cpp
  
  void CamuleDlg::ShowConnectionState(bool skinChanged)
  {
-@@ -1452,6 +1470,8 @@
- 		logs_notebook->AddPage(m_logpages[3].page, m_logpages[3].name);
- 	}
- 	
-+	logs_notebook->AddPage(m_logpages[4].page, m_logpages[4].name);
-+	
- 	m_networkpages[1].page->Show(thePrefs::GetNetworkKademlia());		
- 
- 	networks_notebook->Show(thePrefs::GetNetworkED2K() && thePrefs::GetNetworkKademlia());
 diff -uNr src/amuleDlg.h src/amuleDlg.h
 --- src/amuleDlg.h	2011-03-27 21:01:14.000000000 +0800
 +++ src/amuleDlg.h	2011-05-15 17:02:52.000000000 +0800
@@ -179,15 +148,6 @@ diff -uNr src/amule.h src/amule.h
  	wxString GetServerLog(bool reset = false);
  	void AddServerMessageLine(wxString &msg);
 +	void AddDLPMessageLine(wxString &msg);
- 	DECLARE_EVENT_TABLE()
- };
- 
-@@ -541,6 +542,8 @@
- 	
- 	virtual int ShowAlert(wxString msg, wxString title, int flags);
- 	
-+	void AddDLPMessageLine(wxString &msg);
-+	
  	DECLARE_EVENT_TABLE()
  };
  
@@ -2316,17 +2276,6 @@ diff -uNr src/muuli_wdr.cpp src/muuli_wdr.cpp
 diff -uNr src/muuli_wdr.h src/muuli_wdr.h
 --- src/muuli_wdr.h	2011-03-06 02:11:14.000000000 +0800
 +++ src/muuli_wdr.h	2011-05-15 17:11:16.000000000 +0800
-@@ -331,6 +331,10 @@
- #define ID_BTN_RESET_SERVER 10236
- wxSizer *ServerInfoLog( wxWindow *parent, bool call_fit = TRUE, bool set_sizer = TRUE );
- 
-+#define ID_DLPINFO 22001
-+#define ID_BTN_RESET_DLP 22002
-+wxSizer *DLPInfoLog( wxWindow *parent, bool call_fit = TRUE, bool set_sizer = TRUE );
-+
- #define ID_LOGVIEW 10237
- #define ID_BTN_RESET 10238
- wxSizer *aMuleLog( wxWindow *parent, bool call_fit = TRUE, bool set_sizer = TRUE );
 @@ -419,6 +423,18 @@
  #define ID_DEBUGCATS 10302
  wxSizer *PreferencesDebug( wxWindow *parent, bool call_fit = TRUE, bool set_sizer = TRUE );
@@ -2377,16 +2326,6 @@ diff -uNr src/Preferences.cpp src/Preferences.cpp
  
  /** Cfg class for wxStrings. */
  class Cfg_Str : public Cfg_Tmpl<wxString>
-@@ -990,6 +1004,9 @@
- 	s_userhash[5] = 14;
- 	s_userhash[14] = 111;
- 	
-+	// Dynamic Leecher Protection
-+	CalcDLPCheckMask();
-+	
- #ifndef CLIENT_GUI
- 	LoadPreferences();
- 	ReloadSharedFolders();
 @@ -1098,6 +1115,18 @@
  	NewCfgItem( IDC_NETWORKKAD, (new Cfg_Bool( wxT("/eMule/ConnectToKad"),	s_ConnectToKad, true )) );
  	NewCfgItem( IDC_NETWORKED2K, ( new Cfg_Bool( wxT("/eMule/ConnectToED2K"),	s_ConnectToED2K, true ) ));
