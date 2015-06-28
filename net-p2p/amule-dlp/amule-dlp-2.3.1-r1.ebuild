@@ -6,11 +6,11 @@ EAPI="2"
 
 inherit eutils flag-o-matic wxwidgets user
 
-MY_P=${PN/m/M}-${PV}
+MY_P=${PN/-dlp/}-${PV}
 S="${WORKDIR}"/${MY_P}
 
 DESCRIPTION="aMule, the all-platform eMule p2p client with anti-Leechers patch"
-HOMEPAGE="https://code.google.com/p/amule-dlp"
+HOMEPAGE="https://code.google.com/p/${PN}"
 SRC_URI="mirror://sourceforge/amule/aMule-2.3.1.tar.bz2"
 
 LICENSE="GPL-2"
@@ -46,10 +46,10 @@ pkg_preinst() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-2.2.6-fallocate.diff
+	epatch "${FILESDIR}"/${MY_P/-${PV}/}-2.2.6-fallocate.diff
 	# Bug 412371
-	epatch "${FILESDIR}"/${PN}-2.3.1-gcc47.patch
-	epatch "${FILESDIR}"/${PN}-dlp-2.3.1.patch
+	epatch "${FILESDIR}"/${MY_P/-${PV}/}-${PV/-r1/}-gcc47.patch
+	epatch "${FILESDIR}"/${MY_P}.patch
 }
 
 src_configure() {
