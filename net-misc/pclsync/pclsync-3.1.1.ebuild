@@ -34,6 +34,7 @@ RDEPEND="${DEPEND}
 		dev-db/sqlite:3
 		"
 
+QA_PREBUILT="*"
 S="${WORKDIR}"
 
 src_unpack(){
@@ -51,7 +52,7 @@ src_install(){
 	insinto /
 	doins -r usr
 	fperms +x /usr/bin/pclsync
-	LIBCRYPTO=`equery f crypto++ | grep libcrypto++.so.0.0.0 | tail -n 1`
-	LIBDIR="${LIBCRYPTO%/*}"
-	dosym ${LIBDIR}/libcrypto++.so.0.0.0 ${LIBDIR}/libcrypto++.so.9
+	#LIBCRYPTO=`equery f crypto++ | grep libcrypto++.so.0.0.0 | tail -n 1`
+	#LIBDIR="${LIBCRYPTO%/*}"
+	#dosym ${LIBDIR}/libcrypto++.so.0.0.0 ${LIBDIR}/libcrypto++.so.9
 }
