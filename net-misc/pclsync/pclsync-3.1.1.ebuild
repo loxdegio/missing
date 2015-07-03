@@ -51,8 +51,7 @@ pkg_setup(){
 src_install(){
 	insinto /
 	doins -r usr
-	into /usr
-	dobin usr/bin/pclsync
+	fperm +x /usr/bin/psyncgui
 	#LIBCRYPTO=`equery f crypto++ | grep libcrypto++.so.0.0.0 | tail -n 1`
 	#LIBDIR="${LIBCRYPTO%/*}"
 	#dosym ${LIBDIR}/libcrypto++.so.0.0.0 ${LIBDIR}/libcrypto++.so.9
