@@ -51,3 +51,8 @@ src_install(){
 	#LIBDIR="${LIBCRYPTO%/*}"
 	#dosym ${LIBDIR}/libcrypto++.so.0.0.0 ${LIBDIR}/libcrypto++.so.9
 }
+
+pkg_postinst() {
+	fdo-mime_desktop_database_update
+	gnome2_icon_cache_update
+}
