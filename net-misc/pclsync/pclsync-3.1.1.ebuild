@@ -39,8 +39,8 @@ S="${WORKDIR}"
 
 src_unpack(){
 	unpack ${A}
-	unpack ./data.tar.xz
-	rm -v control.tar.gz data.tar.xz debian-binary
+	unpack ./data.tar.gz
+	rm -v control.tar.gz data.tar.gz debian-binary
 }
 
 pkg_setup(){
